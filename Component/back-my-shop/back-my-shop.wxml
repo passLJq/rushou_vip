@@ -1,0 +1,6 @@
+<!--Component/back-my-shop/back-my-shop.wxml-->
+  <!-- 提示在别人店铺  -->
+  <view class="prompt_title_container" wx:if="{{!fxshopid || (ruid && ruid != uid)}}">
+    <text style="float: left; color: #333;" wx:if="{{ruid && ruid != uid}}">您正在浏览他人的店铺</text>
+    <view style="float: right; color: #fff;" class="prompt_btn" bindtap="backMyshop">{{!fxshopid? '我也要开店': (ruid && ruid != uid)? '切换到自己的店铺': ''}}  </view>
+  </view>

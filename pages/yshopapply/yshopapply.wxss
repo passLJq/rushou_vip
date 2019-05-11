@@ -1,0 +1,4 @@
+/* pages/yshopapply/yshopapply.wxss */
+.kaitong{background-color: #CDA86E;font-size: 34rpx;position: fixed;bottom:0;width: 100%;border-radius: 0;color: #fff}
+.applyimg{display: block;width: 100%}
+.ones{margin-bottom: 38px}

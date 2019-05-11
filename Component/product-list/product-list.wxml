@@ -1,0 +1,79 @@
+<!--Component/product-list/product-list.wxml-->
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<view class="box_container overflow_boxsizing" wx:if="{{slide === 0}}">
+  <view class="list_container overflow_boxsizing padding16" wx:for="{{shopList}}" wx:key="" style="{{listType === 'bill' && index === 0? 'margin-top: 0;': '' }}">
+    <view class="list_content overflow_boxsizing font_14 transition_ease_in_out_fast">
+      <view class="flex product_list overflow_sizing">
+        <view class="default_address_container flex flex_align_center" bindtap="selectItem" data-idx="{{slide}}{{index}}" wx:if="{{(listType === 'bill' && !statusType) || listType !== 'bill'}}">
+          <view style="{{selectArr[slide][index]? '': ' border: 1px solid #D8D8D8;'}}">
+            <image src="/image/select_icon.png" wx:if="{{selectArr[slide][index]}}"></image>
+          </view>
+        </view>
+        <view class="product_img_container" bindtap='toProDetail' data-pid="{{listType === 'bill'? item.proid: item.pid}}">
+          <image src="{{listType === 'bill'? (item.proimg || '/image/bkg_cover.jpg'): (item.pic || '/image/bkg_cover.jpg')}}"></image>
+        </view>
+        <view class="flex flex_v flex_pack_justify_between flex_1" bindtap='toProDetail' data-pid="{{listType === 'bill'? item.proid: item.pid}}">
+          <view class="flex flex_pack_justify_between">
+            <view class="line_over_2">
+              <text>
+              <text class="quanqiu" wx:if="{{item.isrushbuy}}" style="display: inline-block; vertical-align: middle;border-radius: 10rpx; background-color: orange; color: #fff; border: 0; padding: 6rpx; margin-right: 10rpx;">限时抢购</text>{{listType === 'bill'? item.proname: item.name}}</text>
+            </view>
+          </view>
+          <view class="flex flex_pack_justify_between flex_align_center">
+            <view class="color_333">
+              <text class="font_12">￥</text>
+              <text class="font_20">{{item.isrushbuy && item.rushbuy.specjson? filters.toFix(filters.JsonParse(item.rushbuy.specjson)[0].Price, 2) : (listType === 'bill'? filters.toFix(item.proprice,2): filters.toFix(item.salePrice,2))}}</text>
+            </view>
+            <view class="font_14" wx:if="{{(listType === 'bill' && !ruid) || listType !== 'bill'}}">
+              <text style="color: #FF422C;">赚￥{{filters.toFix(item.commPrice,2)}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class="list_control overflow_boxsizing flex flex_pack_justify_between flex_align_center" wx:if="{{(listType === 'bill' && !statusType) || listType !== 'bill'}}">
+      <view bindtap='deleteList' data-pid="{{listType === 'bill'? item.proid: item.pid}}">
+        <text class="iconfont icon-shanchu" style="font-size: 40rpx; color: #999; padding: 24rpx;"></text>
+      </view>
+      <view class="flex font_14 color_999 list_btn_container">
+        <view bindtap='movePro' data-type="{{0}}" wx:if="{{index !== 0}}" data-relid="{{listType === 'bill'? item.proid: item.relid}}" data-idx="{{index}}">
+          <text>上移</text>
+        </view>
+        <view bindtap='movePro' data-type="{{1}}" wx:if="{{index < (billMaxCounts - 1)}}" data-relid="{{listType === 'bill'? item.proid: item.relid}}" data-idx="{{index}}">
+          <text>下移</text>
+        </view>
+      </view>
+    </view>
+  </view>
+</view>
+<view wx:if="{{slide === 0 && shopList.length > 0 && !statusType}}" class="footer_container font_14 color_333 flex flex_pack_justify_between flex_align_center padding16 overflow_boxsizing" style="{{isIphoneX?'padding-bottom:48rpx;height: 156rpx;':''}}">
+  <view class="default_address_container flex" bindtap="selectItem" data-idx="a">
+    <view style="{{allSelect? '': ' border: 1px solid #D8D8D8;'}}" class="allselect_box">
+      <image src="/image/select_icon.png" wx:if="{{allSelect}}"></image>
+    </view>
+    <view class="color_333 font_12" style="width: 50rpx; margin-left: 10rpx;">全选</view>
+  </view>
+  <view wx:if="{{listType !== 'bill'}}">
+    <view class="pay_btn can_pay_btn" bindtap="deleteList" data-type="all">
+      <text>一键下架</text>
+    </view>
+  </view>
+  <view wx:if="{{(listType === 'bill' && !statusType)}}" class="flex ">
+    <view class="bill_btn_contianer delete_btn" bindtap='deleteBillSome'>
+      <text>删除</text>
+    </view>
+    <view class="bill_btn_contianer" bindtap='saveBill'>
+      <text>保存清单</text>
+    </view>
+  </view>
+</view>
+<view wx:if="{{slide === 0 && listType === 'bill' && (shopList.length > 0 && statusType === 1)}}" class="footer_container font_14 color_333 flex flex_align_center padding16 overflow_boxsizing" style="justify-content: flex-end;">
+  <view wx:if="{{listType === 'bill'}}" class="flex ">
+    <view class="bill_btn_contianer" bindtap='saveBill'>
+      <text wx:if="{{!statusType}}">保存清单</text>
+      <view wx:if="{{statusType === 1 && shopList.length > 0}}" catchtap="shareBill">
+        <text>分享此清单</text>
+      </view>
+    </view>
+  </view>
+</view>

@@ -1,0 +1,32 @@
+/* pages/frinedsharp/frinedsharp.wxss */
+@import "../../Component/sharebox/sharebox.wxss";
+
+page {
+  background-color: rgb(255, 194, 70);
+}
+
+.backimg {
+  z-index: 999;
+  top: 0;
+  bottom: 0;
+  width: 100%;
+  position: relative;
+}
+
+.backimg image {
+  width: 100%;
+}
+
+.yaoqinbtn {
+  width: 80%;
+  position: absolute;
+  left: 10%;
+  top: 59%;
+  font-size: 28rpx;
+  background: linear-gradient(-90deg, rgba(255, 79, 45, 1), rgba(255, 132, 57, 1));
+  border-radius: 29px;
+  text-align: center;
+  color: #fff;
+  padding: 26rpx 0;
+  z-index: 9999;
+}

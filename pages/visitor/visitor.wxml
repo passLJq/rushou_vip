@@ -1,0 +1,18 @@
+<!--pages/visitor/visitor.wxml-->
+<view class='cons'>
+
+  <view class='vi_item vi_box' wx:for="{{userinfo.visitorlist}}" bindtap='goindex' data-index="{{index}}">
+    <view class='vi_item'>
+       <image src="../../image/man.jpg" wx:if="{{item.userhead==''}}"></image>
+      <image src="{{item.userhead}}" wx:else></image>
+      <text style='margin-left:20rpx' wx:if="{{item.username==''}}">游客</text>
+      <text style='margin-left:20rpx' wx:else>{{item.username}}</text>
+    </view>
+    <view class='vi_time'>{{item.visittime}}<i class="right-arrow" wx:if="{{stasu}}"></i></view>
+  </view>
+
+</view>
+
+<view class='nomore'>
+<text>—— 没有更多数据 ——</text>
+</view>

@@ -1,0 +1,11 @@
+/* pages/mymoney/mymoney.wxss */
+@import "../../Component/goapp/goapp.wxss";
+page{background-color: #fff}
+.items{display: flex;align-items: center;}
+.ules{justify-content: space-between;font-size: 34rpx;margin-bottom: 16rpx;}
+.bottom{color: #999999;font-size: 26rpx}
+.bottom1{margin-bottom: 16rpx}
+.bop2{color: #333;margin-left: 14rpx}
+.bop3{color: #333}
+.mingxibox{font-size: 28rpx;padding: 30rpx 0rpx;margin:0 30rpx;border-bottom: 1px solid #D8D8D8}
+.ab1{letter-spacing:14rpx;}

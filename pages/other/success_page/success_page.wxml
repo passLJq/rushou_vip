@@ -1,0 +1,33 @@
+<!--pages/other/success_page/success_page.wxml-->
+<view>
+  <view class="top_container flex flex_align_center overflow_boxsizing">
+    <view>
+      <text class="iconfont icon-success1" style="font-size: 88rpx; margin-right: 30rpx;color: #CDA86E;"></text>
+    </view>
+    <view class="flex flex_v flex_pack_justify_between">
+      <view class="font_17 color_333 font_weight" style="padding-bottom: 20rpx;">
+        <text>支付成功</text>
+      </view>
+      <view class="font_12 color_333">
+        <text>卖家将尽快为您发货哦~</text>
+      </view>
+    </view>
+  </view>
+  <view class="bottom_container">
+    <view class="list_container"></view>
+    <view class="list_container overflow_boxsizing" bindtap='toOrders' hover-class='hover_btn'>
+      <view class=" flex flex_pack_justify_between">
+        <text>查看订单</text>
+        <text class="more_icon"></text>
+      </view>
+    </view>
+    <view class="list_container overflow_boxsizing" bindtap='toIndex' hover-class='hover_btn'>
+      <view class=" flex flex_pack_justify_between">
+        <text>继续购物</text>
+        <text class="more_icon"></text>
+      </view>
+    </view>
+
+  </view>
+
+</view>

@@ -1,0 +1,14 @@
+<view wx:if="{{isfreeze==1}}">
+<view class="shopzhezao" catchtouchmove='nogun'></view>
+<view class='shopwive'>
+  <view class="shopimagebox" catchtouchmove='nogun'>
+    <image src='https://images.rushouvip.cn/IMG/dongjieshow.png' mode='widthFix'></image>
+    <view class="titleview">
+      <view>您的店铺已被冻结</view>
+      <view>您在30天未售出3笔订单</view>
+      <view>购买解冻专区商品后，可转为正式店主</view>
+      <view class="wxbtn " bindtap='gobuy_openshop'>立即解冻</view>
+    </view>
+  </view>
+</view>
+</view>

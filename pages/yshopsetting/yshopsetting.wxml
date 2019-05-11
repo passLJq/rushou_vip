@@ -1,0 +1,48 @@
+<!--pages/yshopsetting/yshopsetting.wxml-->
+<view class='toubu'>
+  <text class="setp1">店铺招牌展示效果</text>
+  <image src="{{userinfo.adimg}}" mode='aspectFit' bindtap='openimg' data-index='1'></image>
+  <text class="setp2" bindtap='openimg' data-index='1'>点击更换招牌(600*300像素)</text>
+</view>
+
+<view class='bititle'>
+  <text>基本信息</text>
+</view>
+
+
+<view class='libox'>
+  <view class='item'>
+    <view>
+      <text class='tx1'>店铺LOGO</text>
+      <view class='tx2'>建议尺寸为120*120px像素的图片</view>
+    </view>
+    <view class='items'>
+      <image src="{{userinfo.shoplogo}}" bindtap='openimg' data-index='2'></image>
+      <i class='right-arrow'></i>
+    </view>
+  </view>
+  <view class='item a' bindtap='openset' data-index='1' data-title="{{userinfo.shopname}}">
+    <text class='tx1'>店铺名称</text>
+    <view class='items'>
+      <text class='tx3'>{{userinfo.shopname}}</text>
+      <i class='right-arrow'></i>
+    </view>
+  </view>
+  <view class='item a' bindtap='openset' data-index='2' data-title="{{userinfo.notice}}">
+    <text class='tx1'>个性签名</text>
+    <view class='items'>
+      <text class='tx3'>{{userinfo.notice}}</text>
+      <i class='right-arrow'></i>
+    </view>
+  </view>
+  <!-- <view class='alse'>
+    <text>分享设置</text>
+  </view>
+  <view class='item a' bindtap='openset' data-index='3' data-title="{{userinfo.sharelanguage}}">
+    <text class='tx1'>店铺分享语</text>
+    <view class='items'>
+      <text class='tx3'>{{userinfo.sharelanguage}}</text>
+      <i class='right-arrow'></i>
+    </view>
+  </view> -->
+</view>

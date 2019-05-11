@@ -1,0 +1,264 @@
+<!--index.wxml-->
+<import src="../../Component/goTop/goTop.wxml" />
+<import src="../../Component/go_openyshop/go_openyshop.wxml" />
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+
+<import src="../../Component/sharebox/sharebox.wxml" />
+<view id="NAV">
+  <view style='position: relative;' class="imgsexbox">
+    <image mode="widthFix" src="{{userinfo.adimg}}" class="headimg"></image>
+
+    <view class='item touxianfu' wx:if="{{dianstatus>1}}">
+      <view style="margin-left:30rpx">
+        <text>您正在浏览其他人店铺<text wx:if="{{dianstatus==2}}">，点击回到自己的店铺</text></text>
+      </view>
+      <view style="margin-right:20rpx" class='backbtn' bindtap='btngo'>
+        <text>{{btntext}}</text>
+      </view>
+    </view>
+    <!-- 头部悬浮 -->
+  </view>
+  <!-- 头部图片 -->
+  <view class='imagebox'>
+
+    <view class='item tou_biaoti'>
+      <image src="{{userinfo.shoplogo}}" class="touimg" bindtap='openyshopsetting'></image>
+      <text class="p1">{{userinfo.shopname}}</text>
+      <view class='item shore' bindtap='goshare' wx:if="{{dianstatus==1}}" data-type="dianpu">
+        <i class="iconfont icon-fenxiang1"></i>
+        <text>分享</text>
+      </view>
+    </view>
+
+    <view class='notice'>
+      <text>{{userinfo.notice}}</text>
+    </view>
+
+    <view class='visit' wx:if="{{userinfo.visitorlist!=null}}">
+      <text>有<text style="color:#333"> {{userinfo.visitorcount}} </text>位客人访问了店铺哦~</text>
+      <view class="item" bindtap='openvisitor'>
+        <view class="visit_num" wx:for="{{userinfo.visitorlist}}" wx:if="{{index<6}}" wx:key="">
+          <image src="../../image/man.jpg" wx:if="{{item.userhead==''}}"></image>
+          <image src="{{item.userhead}}" wx:else></image>
+        </view>
+        <view class="visit_num">
+          <image src="../../image/more.png"></image>
+        </view>
+      </view>
+    </view>
+    <!-- 公告 -->
+    <!-- 签到 -->
+    <view bindtap='goqiandao' class='activeimg' wx:if="{{showqiandao&&dianstatus==1}}">
+      <image src="https://images.rushouvip.cn/IMG/chu4.gif" mode="widthFix"></image>
+    </view>
+  </view>
+  <!-- 限时抢购 -->
+  <view class="rushBuy_box">
+    <view class="rushBuy_title overflow_boxsizing flex flex_align_center flex_pack_center color_333 font_17 font_weight">
+      <text>限时抢购</text>
+      <image src="/image/rush_buy_title.png"></image>
+    </view>
+    <!-- NAV -->
+    <view class="NAV_container font_14 color_333">
+      <scroll-view scroll-x="true" scroll-with-animation="true" style="width: 100%; height: 100%; white-space: nowrap; position: relative;" scroll-into-view="scroll_{{rushBuySlide}}">
+        <view wx:for="{{rushBuyNav}}" wx:key="" class="nav_list box_container {{index === rushBuySlide? 'select_nav': ''}}" catchtap='changeNav' data-idx="{{index}}" id="scroll_{{index}}">
+          <view class=" flex flex_v flex_pack_center flex_align_center overflow_boxsizing" style="width: 100%; height:100%;">
+            <view class="font_17" style="padding-bottom: 10rpx;" wx:if="{{index !== 7}}">
+              <text>{{item.time}}</text>
+            </view>
+            <view class="font_12" style="font-weight: 400;" wx:if="{{index !== 7}}">
+              <text>{{nowIndex >= index && index > 1? (nowIndex === index ? '抢购中' : '已开抢'): item.status}}</text>
+            </view>
+            <view wx:if="{{index === 7}}"></view>
+            <view  wx:if="{{index === 7}}" style="position: relative; top: -10rpx;">
+              <text>明日预告</text>
+            </view>
+            
+          </view>
+        </view>
+        <view class="rushbuy_line_red translateXY transition_ease_in_out_fast" style="left: {{iconPosition + 'px;'}}"></view>
+      </scroll-view>
+    </view>
+    <!-- 限时列表 -->
+    <view class="padding16 overflow_boxsizing flex" wx:if="{{isLoaded}}">
+      <view class="rushBuy_list_container overflow_boxsizing" wx:for="{{rushBuyMsg[rushBuySlide]}}" wx:key="{{item.pid}}" wx:if="{{index < 3 && ((item.istoday && rushBuyMsg[rushBuySlide].length) || rushBuySlide === 7)}}" bindtap="toProdetail" data-pid="{{item.pid}}">
+        <view class="rushBuy_pro_imgs">
+          <image src="{{item.src || '/image/bkg_cover.jpg'}}"></image>
+        </view>
+        <view class="font_12 color_333 line_over_2 rushBuy_pro_names">
+          <text>{{item.title}}</text>
+        </view>
+        <view class="flex flex_pack_justify_between flex_align_center rushBuy_pro_prices">
+          <view class="font_10 rushBuy_pro_type flex flex_align_center flex_pack_center">
+          <!-- <text wx:if="{{daysnow<=14&&monthsnow==12}}">双12价</text> -->
+            <text>抢购价</text>
+          </view>
+          <view class="font_14" wx:if="{{item.price}}">
+            <text>￥{{filters.toFix(item.price, 2)}}</text>
+          </view>
+        </view>
+      </view>
+      <view wx:if="{{!rushBuyMsg[rushBuySlide].length}}" class="overflow_boxsizing flex flex_pack_center flex_align_center" style="width:100%; height: 370rpx; color: #999; font-size: 28rpx;">
+        <text>该时间段暂时没有活动</text>
+      </view>
+    </view>
+    <view class="rushBuy_title overflow_boxsizing flex flex_align_center flex_pack_center font_12 color_333" bindtap='toRushBuy'>
+      <text>查看更多</text>
+      <text class="more_icon"></text>
+    </view>
+  </view>
+  <!-- 头部信息 -->
+  <!-- 清单列表 -->
+  <view class="myprobox" wx:for="{{qingdanlist}}" wx:key="prolistid">
+    <view class='mypro'>
+      <view class='mypro_shore'>
+        <view class="qinname">{{item.name}}</view>
+        <view class="qinjianjie">{{item.sign}}</view>
+      </view>
+      <!-- 我自己的商品 -->
+      <view class='vidioimg' wx:if="{{item.record!=''&&item.record!=null}}">
+        <image src='{{qindanimg[index]}}' mode='aspectFit' data-record="{{item.record}}" data-index="{{index}}" bindtap='pofan' data-type="qingdan"></image>
+        <text class='vitime'>{{item.recordcount}}''</text>
+      </view>
+      <view class='myproul'>
+        <navigator class='item myproli qindangtou' hover-class="none" url="../product_bill_edit/product_bill_edit?prolistid={{item.prolistid}}&statusType=1&pageName=index">
+          <view class="qinimgbox">
+            <view wx:for="{{item.itemlist}}" wx:for-index="idx" wx:for-item="list" wx:key="" wx:if="{{idx<4}}" class='qinimgui'>
+              <image src='{{list.proimg}}'></image>
+              <view class="qinmore" wx:if="{{idx==3&&item.itemlist.length>4}}">
+                <text>共{{item.count}}件商品</text>
+              </view>
+            </view>
+          </view>
+        </navigator>
+        <!-- <view class="item lanmu" wx:if="{{dianstatus==1}}">
+        <i class="iconfont icon-bianji" bindtap="goxiugai" data-index="{{index}}"></i>
+        <i class="iconfont icon-shanchu" bindtap="downpro" data-index="{{index}}"></i>
+        <i class="iconfont icon-fenxiang1" bindtap='goshare' data-type="pro" data-index="{{index}}"></i>
+      </view> -->
+      </view>
+      <!-- 我自己的商品end -->
+    </view>
+  </view>
+  <!-- 店铺商品列表 -->
+  <view class="myprobox" wx:for="{{yshopdata}}" wx:key="pid">
+    <view class='mypro'>
+      <i class="iconfont icon-zhuangshiyongyinhao"></i>
+      <view class='mypro_shore'>
+        <text>{{item.share}}</text>
+      </view>
+      <!-- 我自己的商品 -->
+      <view class='vidioimg' wx:if="{{item.record!=''&&item.record!=null}}">
+        <image src='{{imgecheck[index]}}' mode='aspectFit' data-record="{{item.record}}" data-index="{{index}}" bindtap='pofan'></image>
+        <text class='vitime'>{{item.recordtime}}''</text>
+      </view>
+      <view class='myproul'>
+        <navigator class='item myproli' hover-class="none" url="../productdetail/productdetail?pid={{item.pid}}">
+          <view class='mypro_left'>
+            <image src="{{item.pic}}" class='mypro_img'></image>
+            <image src="../../image/shouwan.png" class="nopro" wx:if="{{item.stocks==0}}"></image>
+          </view>
+          <view class='mypro_right'>
+            <text class="mypro_title">
+              <text class="quanqiu" wx:if="{{item.isrushbuy}}" style="display: inline-block; vertical-align: middle;border-radius: 10rpx; background-color: orange; color: #fff; border: 0; padding: 6rpx; margin-right: 10rpx;">限时抢购</text>{{item.name}}
+            </text>
+            <view class='item mypro_probox'>
+              <view class="mypro_price">
+                <text style="font-size:28rpx">¥</text>{{item.isrushbuy && item.rushbuy.specjson? filters.toFix(filters.JsonParse(item.rushbuy.specjson)[0].Price, 2) : filters.toFix(item.salePrice,2)}}
+                <text class="mypro_saleprice" wx:if="{{item.marketPrice>0}}">¥{{filters.toFix(item.marketPrice,2)}}</text>
+              </view>
+              <text class="zuan" wx:if="{{dianstatus==1}}">赚¥{{filters.toFix(item.commPrice,2)}}</text>
+              <!-- <text class="zuan" wx:if="{{dianstatus==1}}">赚¥100.00</text> -->
+            </view>
+          </view>
+        </navigator>
+        <view class="item lanmu" wx:if="{{dianstatus==1}}">
+          <i class="iconfont icon-bianji" bindtap="goxiugai" data-index="{{index}}"></i>
+          <i class="iconfont icon-shanchu" bindtap="downpro" data-index="{{index}}"></i>
+          <i class="iconfont icon-fenxiang1" bindtap='goshare' data-type="pro" data-index="{{index}}"></i>
+        </view>
+      </view>
+      <!-- 我自己的商品end -->
+    </view>
+  </view>
+  <!-- 我的店铺商品 -->
+</view>
+<!-- NAV -->
+<view class="nav_container overflow_boxsizing flex font_14 color_333" style="position: {{canFixedTop? 'fixed; top: 0;': 'relative;'}}">
+  <view class="overflow_boxsizing slider_list" bindtap='changeSlide' data-idx="{{index}}" wx:for="{{navList}}" wx:key="">
+    <text class="{{slide === index? 'color_selected': ''}} transition_ease_in_out_fast">{{item}}</text>
+  </view>
+  <view class="line_red translateXY transition_ease_in_out_fast" style="left: {{(slide * 100/navList.length) + (100/navList.length/2)+'%'}};"></view>
+</view>
+<!-- <view class='gowu item' style="justify-content:center">
+  <image src="../../image/aixin.png" style="width:28rpx;height:28rpx;margin-right:10rpx"></image>
+  <text>好物推荐</text>
+</view> -->
+<!-- 标题 -->
+<view>
+
+  <view class="gowu_bigbox clear">
+    <view class="gowu_box" wx:for="{{listdata[slide]}}" wx:key="{{item.isup}}">
+      <navigator hover-class="none" url="../productdetail/productdetail?pid={{item.pid}}&indexIdx={{index}}">
+        <image src="{{item.pic}}" class="gowu_img" style='height:{{banimgheight}}'></image>
+        <image src="../../image/shouwan.png" class="pronopro" wx:if="{{item.stocks==0}}"></image>
+        <view class='gowu_xiabox'>
+          <text class='gowu_title'>
+            <text class="quanqiu" wx:if="{{item.isrushbuy}}" style="display: inline-block; vertical-align: middle;border-radius: 10rpx; background-color: orange; color: #fff; border: 0; padding: 6rpx; margin-right: 10rpx;">限时抢购</text> {{item.name}}
+          </text>
+          <view class='gowu_price'>
+            <text class='gowu_pro'>¥{{item.isrushbuy && item.rushbuy.specjson? filters.toFix(filters.JsonParse(item.rushbuy.specjson)[0].Price, 2) : filters.toFix(item.salePrice,2)}}<text class='gowu_salepro' wx:if="{{item.marketPrice!=0}}">¥{{filters.toFix(item.marketPrice,2)}}</text></text>
+            <i class='iconfont icon-jia' catchtap="addpro" data-index="{{index}}" data-pid="{{item.pid}}" data-name="{{item.name}}" data-pic="{{item.pic}}" data-saleprice='{{item.salePrice}}' data-marketprice="{{item.marketPrice}}" wx:if="{{item.isup==0&&dianstatus==1}}"></i>
+          </view>
+        </view>
+      </navigator>
+    </view>
+  </view>
+  <!-- 列表 -->
+</view>
+<!--没有更多了  -->
+<view class="text_center" wx:if="{{page[slide] !== 1 && noMore && listdata[slide].length < (page[slide] * pagesize[slide])}}" style="background-color: transparent; line-height:60rpx;">
+  <text class="color_999 font_12" style="padding: 20rpx 0;">{{(listdata[slide].length + pagesize[slide]) === (page[slide] * pagesize[slide])? '正在加载中...': '没有更多数据了'}}</text>
+</view>
+<template is="sharebox" data="{{showshare,haibao:haibao,zuan:zuan}}" />
+<template is="goTop" data="{{showtop}}" />
+<go_openyshop isfreeze="{{isfreeze}}"></go_openyshop>
+
+<!-- //正式店主升级成功的弹窗 -->
+<view wx:if="{{userinfo.isshowtip}}">
+  <view class='zhezhao' bindtap='okshop'></view>
+  <view>
+    <image src='https://images.rushouvip.cn/WebApp/invite/showgood.png' class="showmoe" mode="widthFix"></image>
+  </view>
+</view>
+
+<view class="qindan" bindtap='gocreadorder' wx:if="{{dianstatus === 1}}">
+  <image src="../../image/allshop.png"></image>
+</view>
+
+<view wx:if="{{showqiandao&&dianstatus==3}}" style="{{hideqian?'display:none':''}}">
+  <view class='zhezhao' bindtap='hideyemian'></view>
+  <view class="showmoese">
+    <view style='position:relative'>
+      <image src='https://images.rushouvip.cn/IMG/gxqiandao.png' mode="widthFix" class="imgs"></image>
+      <view class="userbpx">
+        <image src="{{userinfo.shoplogo}}" class="userimgs"></image>
+      </view>
+      <view class="btnbox">
+        <view class="wxbtn okuo" bindtap='btngo' data-type="qiandao">马上签到</view>
+      </view>
+    </view>
+  </view>
+</view>
+<!-- //showqiandao有签到弹窗出来时先隐藏 -->
+<!-- 新实习店主送优惠券 -->
+<new-user-prompt-box showShopCoupon="{{showShopCoupon}}" uid="{{uid}}" fxshopid="{{fxshopid}}" bindchangeShopCoupon="changeShopCoupon" style="{{(!uid || !fxshopid) && showqiandao?'display:none':''}}"></new-user-prompt-box>
+<!-- 中秋节弹窗 -->
+<view style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(51,51,51,0.7); z-index: 99999999;" catchtouchmove="true" wx:if="{{canShowMidAutumnFestival}}">
+  <view class="translateXY transition_ease_in_out_fast" style="position: fixed; top: 50%; left: 50%; width: 609rpx; height: 696rpx; border-radius:16rpx;box-shadow:0rpx 4rpx 20rpx 0rpx rgba(51,51,51,0.2);">
+    <image src="https://images.rushouvip.cn/IMG/zhongqiurukou.jpg" style="width: 100%; height: 100%;border-radius:16rpx;" bindtap='toMidAutumnFestival'></image>
+    <image src="/image/activity_icon_close.png" class="translateXY" style="width:64rpx; height: 64rpx; position: absolute; left: 50%; bottom: -130rpx;" bindtap='closeMidAutumnFestival'></image>
+  </view>
+</view>
+
+<foot-nav clickindex='0'></foot-nav>

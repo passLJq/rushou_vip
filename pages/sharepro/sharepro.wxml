@@ -1,0 +1,21 @@
+<!--pages/sharepro/sharepro.wxml-->
+<import src="../../Component/sharebox/sharebox.wxml" />
+
+<view class="toimg">
+<image src="https://images.rushouvip.cn/IMG/chu3.jpg" mode="widthFix"></image>
+</view>
+
+<view class="aliibox">
+  <view class="pitem box" wx:for="{{listdata}}" bindtap='goductdetail' data-pid="{{item.pid}}">
+    <image src='{{item.src}}' class="proimg"></image>
+    <view>
+      <view class="protitle">{{item.title}}</view>
+      <view class="pitem jiage">
+        <view><text class="doms">¥</text>{{item.salePrice}}</view>
+        <view class="wxbtn" catchtap='goshare' data-index="{{index}}">立即分享</view>
+      </view>
+    </view>
+  </view>
+</view>
+
+  <template is="sharebox" data="{{showshare, zuan: zuan,haibao:haibao}}" />

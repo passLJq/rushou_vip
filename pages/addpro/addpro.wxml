@@ -1,0 +1,78 @@
+<!--pages/addpro/addpro.wxml-->
+<view class='addtou'>
+  <text class='tui'>推荐语</text>
+  <textarea bindblur="bindTextAreaBlur" class='addtext' placeholder-placeholder-style='z-index:-99' placeholder='输入推荐语，将吸引到更多的客人哦~' maxlength='30' bindinput='arertext' value='{{texts}}'/>
+  <text class='num'>{{nowcount}}/{{lettercount}}</text>
+</view>
+<!-- 头部 -->
+<view class='addtou'>
+<view class="asietm">
+  <text class='tui'>语音推荐</text>
+<image src="../../image/new.png"></image>
+</view>
+    <button class='luyin'   open-type="openSetting" wx:if="{{status==2}}" bindopensetting="checkluying">请开启录音授权</button>
+  <button class='luyin' bindtap='openvied' wx:if='{{(video==1||video==2)&&status==1}}' >我要开始录音</button>
+  <view class='items' wx:if='{{video==3}}'>
+    <view class='vidioimg'>
+      <image src='{{bosrc}}' mode='aspectFit' bindtap='playRecord'></image>
+      <text class='vitime'>{{videotime}}''</text>
+    </view>
+    <text class='lu' bindtap='ales' data-del='1'>重新录制</text>
+  </view>
+</view>
+<!-- 录音 -->
+<view class='addtou item'>
+  <image src="{{datas.pic}}"></image>
+  <view>
+    <view class='protitle'>
+      <text>{{datas.name}}</text>
+    </view>
+    <view class='price'>
+      <text><text style="font-size:28rpx">¥</text>{{datas.salePrice}}</text>
+    </view>
+    <view class='saleprice' wx:if="{{datas.marketPrice!=0}}">
+      <text>¥{{datas.marketPrice}}</text>
+    </view>
+  </view>
+</view>
+<!-- 商品 -->
+<view>
+  <view class='wxbtn' style='width:90%' bindtap='shangjia'>
+    <text wx:if='{{datas.type}}'>确认修改</text>
+    <text wx:else>立即上架</text>
+  </view>
+</view>
+<!-- 上架 -->
+
+<view class='zhezao' wx:if='{{openvideo}}' catchtouchmove="nomove" bindtap='openvied'></view>
+
+<view class='bbox' style="{{openvideo?'display:block':'display:none'}}">
+  <view class="circle-box">
+    <canvas class="circle" style="width:70px; height:70px;" canvas-id="canvasCircle">
+    </canvas>
+    <canvas class="circle" style="z-index:99999;width:70px; height:70px;" canvas-id="canvasArcCir">
+    </canvas>
+    <view class='bo' wx:if='{{video==1}}'>
+      <i bindtap='drawCircle' class='iconfont icon-bofang'></i>
+    </view>
+    <view class='bo' style='bottom:45px' wx:elif='{{video==2}}'>
+      <i bindtap='stopcircle' class='iconfont icon-zanting' style='font-size:42px'></i>
+    </view>
+    <view class='bo' style='bottom:45px' wx:elif='{{video==3}}'>
+      <i  class='iconfont icon-yuan' style='font-size:42px'></i>
+    </view>
+    <text class='statlu' wx:if='{{video==1}}'>开始录制</text>
+    <text class='statlu' wx:elif='{{video==2}}'>录制中</text>
+
+    <block wx:if='{{video==3}}'>
+      <view class='queren' bindtap='openvied' data-que='1'>
+        <i class='iconfont icon-queren'></i>
+        <view>确认</view>
+      </view>
+      <view class='del' bindtap='delevied'>
+        <i class='iconfont icon-Close'></i>
+        <view>删除</view>
+      </view>
+    </block>
+  </view>
+</view>

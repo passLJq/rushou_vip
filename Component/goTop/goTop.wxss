@@ -1,0 +1,14 @@
+/* Component/goTop/goTop.wxss */
+.waibu{
+  position: fixed;
+bottom: 70px;
+right: 3%;
+border-radius:50%;
+z-index:9999;
+ box-shadow:0px 2px 5px 0px rgba(216,216,216,1);
+}
+.waibu image{
+  width: 72rpx;
+  height: 72rpx;
+  display: block;
+}

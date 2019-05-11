@@ -1,0 +1,77 @@
+<!--pages/rushbuy_list/rushbuy_list.wxml-->
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<import src="../../Component/sharebox/sharebox.wxml" />
+<view>
+  <!-- NAV -->
+  <view class="NAV_container font_14 color_333">
+    <scroll-view scroll-x="true" scroll-with-animation="true" style="width: 100%; height: 100%; white-space: nowrap; position: relative;" scroll-into-view="scroll_{{slide}}">
+      <view wx:for="{{rushBuyNav}}" wx:key="" class="nav_list box_container {{index === slide? 'select_nav': ''}}" catchtap='changeNav' data-idx="{{index}}" id="scroll_{{index}}" style="{{index === 7 ? 'position: relative; top: -8rpx;' : ''}}">
+        <view class=" flex flex_v flex_pack_center flex_align_center overflow_boxsizing" style="width: 100%; height:100%;">
+          <view class="font_17" style="padding-bottom: 10rpx;" wx:if="{{index !== 7}}">
+            <text>{{item.time}}</text>
+          </view>
+          <view class="font_12" wx:if="{{index !== 7}}">
+            <text>{{nowIndex >= index && index > 1? '抢购中': item.status}}</text>
+          </view>
+          <view class="font_17" wx:if="{{index === 7}}">
+          </view>
+          <view  class="font_12" wx:if="{{index === 7}}">
+            <text>明日预告</text>
+          </view>
+        </view>
+      </view>
+      <view class="line_red translateXY transition_ease_in_out_fast" style="left: {{iconPosition + 'px;'}}"></view>
+    </scroll-view>
+  </view>
+  <!-- 列表 -->
+  <view class="list_container overflow_boxsizing" wx:if="{{(rushBuyMsg[slide].length > 0 && isLoaded) || slide === 7}}">
+    <view class="prolist_container overflow_boxsizing flex" wx:for="{{rushBuyMsg[slide]}}" wx:key="{{item.pid}}" bindtap='toProDetail' data-pid="{{item.pid}}">
+      <view class="proImg_container overflow_boxsizing">
+        <image src="{{item.src || '/image/bkg_cover.jpg'}}"></image>
+      </view>
+      <view class="overflow_boxsizing content_container font_14 flex_1 flex flex_v flex_pack_justify_between">
+        <view class="line_over_2">
+          <text>{{item.title}}</text>
+        </view>
+        <view class="flex flex_pack_justify_between">
+          <view class="flex flex_align_center">
+            <view class="rushBuy_title overflow_boxsizing flex flex_align_center flex_pack_center">
+              <text class="font_10">抢购价</text>
+            </view>
+            <view class="font_weight color_333" wx:if="{{item.price}}">
+              <text class="font_10">¥</text>
+              <text class="font_16">{{filters.toFix(item.price, 2)}}</text>
+            </view>
+          </view>
+          <view class="color_light_yellow font_12 flex flex_align_center" wx:if="{{fxshopid && !ruid}}">
+            <text wx:if="{{item.commPrice}}">赚<text class="font_10">¥</text>{{filters.toFix(item.commPrice, 2)}}元</text>
+          </view>
+        </view>
+        <view class="font_10 color_999">
+          <text wx:if="{{item.salePrice}}">原价：￥{{filters.toFix(item.salePrice, 2)}}</text>
+        </view>
+        <view class="flex font_12" style="align-self:flex-end; margin-top: 24rpx;">
+          <view class="color_999 overflow_boxsizing addPro_container flex flex_align_center flex_pack_center" catchtap="addpro" data-idx="{{index}}" wx:if="{{fxshopid && !ruid}}" data-pid="{{item.pid}}">
+            <text>{{!item.isup? '上架': '已上架'}}</text>
+          </view>
+          <view class="color_fff overflow_boxsizing share_container flex flex_align_center flex_pack_center" catchtap='goshare' data-zuan="{{item.commPrice}}" data-idx="{{index}}" wx:if="{{fxshopid && !ruid}}">
+            <text>分享</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--没有数据  -->
+  <view wx:if="{{rushBuyMsg[slide].length < 1 && isLoaded}}" class="flex flex_v flex_align_center" style="margin-top: 200rpx;">
+    <!-- <view>
+      <image src="/image/noorders.png" style="width: 432rpx; height: 342rpx;"></image>
+    </view> -->
+    <view class="color_999 font_14 text_center">
+      <view class="text_center">
+        <image src="/image/no_pro_list_1.png" style="width: 300rpx; height: 300rpx;margin: 0 auto;"></image>
+      </view>
+      <text>暂时没有活动</text>
+    </view>
+  </view>
+  <template is="sharebox" data="{{showshare, zuan: zuan,haibao:haibao}}" />
+</view>

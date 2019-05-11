@@ -1,0 +1,71 @@
+/* pages/class/class.wxss */
+@import "../../common/iconfont.wxss";
+@import "../../Component/sharebox/sharebox.wxss";
+@import "../../Component/goTop/goTop.wxss";
+.suo{background: #F6F6FA;padding: 20rpx 0rpx;margin:0 30rpx 0rpx 30rpx;color: #999999;display: flex;align-items: center;border-radius: 8px}
+.suo i{font-size: 26rpx;margin-left: 20rpx;}
+.suo text{margin-left: 20rpx;font-size: 24rpx}
+swiper{height: 360rpx;}
+swiper image{width: 100%;display: block;height: 360rpx}
+.swibtn{position: absolute;z-index: 9999;bottom: 5%;left: 0;right: 0;margin: auto;display: flex;align-items: center;justify-content: center}
+.swibtnli{width: 8px;height: 8px;background: rgb(227,224,219);border-radius: 50%;margin-right: 10px;flex-shrink: 0}
+.swactive{background: #CDA86E;width: 20px;border-radius: 4px}
+.b{position: relative}
+.fenul{display: flex;align-items: center;flex-wrap: wrap ;margin-bottom: 20rpx;background: #fff;padding-bottom: 30rpx}
+.fenli{width: 25%;box-sizing: border-box;text-align: center;padding-top: 30rpx}
+.fenli image{width: 128rpx;height: 128rpx;margin: 0 auto}
+.fenli text{color: #333;font-size: 24rpx;}
+.tuiitem{display: flex;align-items: center;color: #333;z-index:99999;font-size: 28rpx;padding: 30rpx 0;background: #fff;width: 100%;top:0}
+.tuiactive{font-size: 34rpx;color: #FF422C}
+.tuiactive:before{content:"";position: absolute;bottom: -8px;left: 35%;width: 30%;height: 1px;background: #FF422C;border-top: 3px solid #FF422C;border-radius: 30px}
+.itemlis{width: 33.3%;text-align: center;position: relative}
+.seitem{display: flex;align-items: center}
+.box{justify-content: space-between;padding: 30rpx 30rpx;border-bottom: 1px solid #F6F6FA;position: relative}
+.pronopro{width: 110rpx;height: 110rpx;position: absolute;top:30%;left: 9%}
+.seitemleft{width: 192rpx;height: 192rpx;border-radius: 8px;flex-shrink: 0;margin-right: 20rpx}
+ .seitemright{width: 90%}
+.seitoutext{color: #333;font-size: 28rpx;  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;}
+  .seijiage{margin-top: 40rpx;display: flex;align-items: center;justify-content: space-between;font-weight: 700}
+  .yuan{font-size: 24rpx;}
+  .pp1{font-size:40rpx;color: #333333}
+  .pp2{font-size: 28rpx;color: #FF422C}
+  .btns{display: flex;align-items: center;justify-content: space-around;margin-top: 30rpx}
+  .mais{font-size:28rpx;
+color:#fff;
+background-color:rgb(205,168,110);
+border-radius:30px;
+text-align:center;
+padding:15rpx 0;
+box-shadow:0px 2px 8px #CFCFCF;
+width: 200rpx;
+}
+.shangjia{
+  font-size:28rpx;
+color:#CDA86E;
+background-color:#fff;
+border-radius:30px;
+text-align:center;
+padding:15rpx 0;
+width: 200rpx;
+border: 1px solid #CDA86E
+}
+.ase{justify-content: space-between;padding: 15rpx 30rpx;font-size: 28rpx}
+.visnum{display: flex;align-items: center;width: 70%;flex-shrink: 0;margin-left:30rpx}
+.visnum image{width: 64rpx;height: 64rpx;border-radius: 50%}
+.seitemtext{font-size: 28rpx;}
+.onebox{background-color: #fff}
+.zongbox{padding-bottom: 20rpx;background-color: #F6F6FA}
+.mae1{width: 50%;flex-shrink: 0;height: 316rpx;margin-right: 5rpx}
+.mae2{width: 50%;flex-shrink: 0;margin-left: 5rpx}
+.mae3{margin: 0 0 10rpx 0rpx}
+.mae2 image{height: 154rpx;width: 100%}
+.magebox image{box-sizing: border-box}
+.magebox{height: 316rpx;width: 100%;margin-bottom: 10rpx;overflow: hidden}
+.magebox2{margin-bottom: 20rpx;overflow: hidden}
+.magebox2 image{height: 154rpx;}
+.mae5{margin-left: 5rpx;box-sizing: border-box;width: 50%;flex-shrink: 0;}
+.mae6{margin-right: 5rpx;box-sizing: border-box;width: 50%;flex-shrink: 0;}

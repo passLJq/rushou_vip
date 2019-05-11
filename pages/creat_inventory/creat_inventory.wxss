@@ -1,0 +1,124 @@
+/* pages/addpro/addpro.wxss */
+@import "../../common/iconfont.wxss";
+.addtext{background-color: #F6F6FA;width: 100%;margin-top: 40rpx;font-size: 28rpx;
+padding: 40rpx;box-sizing: border-box;line-height: 2;height:240rpx;}
+.addtou{background-color: #fff;padding: 40rpx 30rpx;position: relative;margin-bottom: 40rpx}
+.tui{color: #333;font-size: 36rpx;font-weight: 700;}
+.num{position: absolute;right: 58rpx;bottom: 60rpx;font-size: 28rpx;color: #999}
+.luyin{padding: 26rpx 0;width: 96%;border: 1px solid #CDA86E;color: #CDA86E;text-align: center;font-size: 28rpx;margin: 0 auto;border-radius: 30px;margin-top: 40rpx;line-height: 1.5;background-color: #fff}
+.item{display: flex;align-items: center;padding:20rpx 30rpx}
+.asietm{display: flex;align-items: center;}
+.asietm image{width: 68rpx;height: 34rpx;margin-left: 20rpx;margin-bottom:10rpx}
+.item image{height: 192rpx;width: 192rpx;display: block;flex-shrink: 0;margin-right: 20rpx;}
+.protitle{color: #333;font-size: 28rpx;  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 76rpx;
+  margin-bottom: 20rpx}
+  .price{color: #CDA86E;font-size: 48rpx;}
+  .saleprice{color:#999;font-size:28rpx;  text-decoration:line-through;}
+  .zhezao{position: absolute;height: 100%;background-color: rgba(0,0,0,0.6);width: 100%;top: 0;z-index: 99999}
+
+
+.circle-box {
+  text-align: center;
+  background: #fff;
+  position: relative;
+  height: 140px;
+  margin: 0 15px;
+  border-radius: 8px;
+}
+
+.circle {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom:33px;
+  margin: auto;
+  z-index: 9999;
+}
+.statlu{
+    position: absolute;
+  left: 0;
+  right: 0;
+  bottom:15rpx;
+  margin: auto;
+  z-index: 9999;
+  font-size: 24rpx;
+}
+.bbox{position: fixed;
+width: 100%;
+transition:bottom 0.5s ease-in-out;
+z-index: 99999;
+bottom: 30rpx;
+}
+.bo{
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom:42px;
+  margin: auto;
+  z-index: 999999;
+  color: #CDA86E;
+
+}
+.bo i{font-size: 48px}
+.queren{  
+  position: absolute;
+    right: 15%;
+  bottom: 34px;
+  z-index: 999999
+  }
+.del{  
+  position: absolute;
+  left: 15%;
+  bottom: 32px;
+    z-index: 999999
+  }
+  .queren i{
+    font-size: 28px;
+    color: #CDA86E
+  }
+  
+  .del i{
+    font-size: 28px;
+    /* color: #999999 */
+  }
+  .queren view,.del view{
+    font-size: 24rpx
+  }
+  .vidioimg{
+    width: 400rpx;
+    display: flex;
+    align-items: center
+  }
+  .vidioimg image{
+  width: 100%;
+  height: 38px
+  }
+  .vitime{
+font-size: 28rpx;
+color: #999;
+margin-left: 10rpx
+  }
+  .lu{
+color: #999;
+font-size: 24rpx;
+border:1px #999 solid;
+padding: 10rpx 20rpx;
+border-radius: 30px
+  }
+  .items{display: flex;align-items: center;justify-content: space-between;width: 100%;margin-top: 40rpx;}
+
+  .qindans{font-size: 28rpx;color: #333;border-bottom: 1px solid #F6F6FA;padding: 10rpx 0;margin: 0 30rpx;
+  justify-content: space-between}
+  .qindanss{font-size: 28rpx;color: #333;padding: 10rpx 0;margin: 0 30rpx;
+  justify-content: space-between;position: relative}
+  .qinteu{flex-shrink: 0;width: 90%}
+  .qindans input{color: #999;width: 75%;margin-left: 30rpx;flex-shrink: 0}
+  .qindanss textarea{flex-shrink: 0;width: 70%;height: 110px;margin-left: 84rpx}
+  .numb2{color: #999;flex-shrink: 0;width: 10%;}
+  .numes{color: #999;flex-shrink: 0;width: 10%;position: absolute;bottom: 13%;right: 0%}
+  .btin{position: fixed;bottom: 3%;width: 90%;left: 5%}

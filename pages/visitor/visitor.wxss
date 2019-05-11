@@ -1,0 +1,59 @@
+/* pages/visitor/visitor.wxss */
+page{
+  margin-top:6rpx
+}
+.vi_item{
+display: flex;
+align-items: center;
+color:#333;
+font-size: 34rpx
+} 
+.vi_box{
+justify-content: space-between;
+border-bottom: 1px solid #F6F6FA;
+padding: 20rpx 0
+}
+.vi_item image{
+  width: 96rpx;
+  height: 96rpx;
+  border-radius: 50%;
+}
+.vi_time{
+  color: #999999;
+  font-size: 28rpx;
+display: flex;
+align-content: center
+}
+.cons{
+  padding: 0 30rpx 0 30rpx;
+  background: #fff
+}
+.nomore{
+  margin: 0 auto;
+  text-align: center;
+  color: #D8D8D8;
+  font-size: 22rpx;
+  margin-top: 30rpx
+}
+.right-arrow {
+    display :inline-block;
+    position: relative;
+    width: 28rpx;
+    height: 36rpx;
+    color: #999999
+}
+
+.right-arrow::after {
+    display: inline-block;
+    content: " ";
+    height: 18rpx;
+    width: 18rpx;
+    border-width: 3rpx 3rpx 0 0;
+    border-color: #999999;
+    border-style: solid;
+    transform: matrix(0.71, 0.71, -0.71, 0.71, 0, 0);
+    position: absolute;
+    top: 50%;
+    right: 6rpx;
+    margin-top: -9rpx;
+}

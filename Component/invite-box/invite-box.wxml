@@ -1,0 +1,19 @@
+<view wx:if="{{openshop}}">
+  <view class="zhezaos" bindtap='colse'></view>
+  <view style="position:relative">
+  <view class="tanchuan">
+     <view class='inputbox' wx:if="{{typestatus&&!bu2}}" style='text-align:center;font-size:30rpx'>
+        <view>不可更改邀请码，如需更改请重新下单</view>
+      </view>
+      <view class='inputbox' wx:if="{{!bu2&&!typestatus}}">
+        <input placeholder='请填写邀请人邀请码' maxlength="6" bindinput='inputcode' type='number'/>
+      </view>
+      <view class="tuijianren" wx:if="{{bu2}}">
+        <view>推荐人信息</view>
+        <image src="{{invetsrc}}" alt=""></image>
+        <view id="tuiname">{{invetname}}</view>
+      </view>
+      <view class="appbtn wxbtn" bindtap='next'>{{btnmsg}}</view>
+    </view>
+  </view>
+</view>

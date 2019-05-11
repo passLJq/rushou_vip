@@ -1,0 +1,10 @@
+<!--pages/inviteshop/inviteshop.wxml-->
+<import src="../../Component/sharebox/sharebox.wxml"/>
+
+<image mode="widthFix" src="https://images.rushouvip.cn/WebApp/invite/v13.jpg" style="width:100%"></image>
+
+<view class="wxbtn a" bindtap="goshare" style="{{isIphoneX?'padding-bottom:40rpx;':''}}">邀请好友开店</view>
+
+<template is="sharebox" data="{{showshare,haibao:haibao}}"/>
+
+<!-- <canvas class="circle" style="width:750px; height:600px;" canvas-id="shenqin" ></canvas> -->

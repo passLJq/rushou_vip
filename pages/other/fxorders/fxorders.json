@@ -1,0 +1,12 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "销售订单",
+  "backgroundColor": "#f5f5f5",
+  "enablePullDownRefresh": true,
+  "onReachBottomDistance": 50,
+  "backgroundTextStyle": "light",
+  "usingComponents": {
+    "search": "/Component/search/search"
+  }
+}

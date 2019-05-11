@@ -1,0 +1,69 @@
+<!--pages/second_class/second_class.wxml-->
+<import src="../../Component/goTop/goTop.wxml" />
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<view>
+  <!-- 轮播 -->
+  <view class='swiper_box_container' wx:if="{{swiperMsg.length > 0}}">
+    <swiper autoplay="false" interval="3000" duration="500" bindchange='chang'>
+      <swiper-item wx:for="{{swiperMsg}}" wx:key="">
+        <image src="{{item.Source || '/image/bkg_cover.jpg'}}" />
+      </swiper-item>
+    </swiper>
+    <view class="swibtn">
+      <view wx:for="{{swiperMsg}}" wx:key="" class="swibtnli {{index==scrollindex?'swactive':''}} {{index}}"></view>
+    </view>
+  </view>
+  <!-- 二级分类 -->
+  <view class='fenul'>
+    <view class='fenli' bindtap='toProList' wx:for="{{classMsg.node}}" wx:key="" wx:if="{{classMsg.node.length > 8? index < 7: true}}" data-itemClassId="{{item.cla.classid}}">
+      <image src="{{item.cla.image}}"></image>
+      <text>{{item.cla.name}}</text>
+    </view>
+    <view class='fenli' bindtap='toProList' wx:if="{{classMsg.node.length > 8}}">
+      <image src="../../image/moclass.png"></image>
+      <text>更多好货</text>
+    </view>
+  </view>
+  <!-- NAV -->
+  <view class="prolist_nav flex overflow_boxsizing font_14 font_333" id="hengbiao" style="{{topok?'position: fixed':'position: static'}}; top: 0;">
+    <view wx:for="{{navTitle}}" wx:key="" bindtap='changeList' data-idx="{{index}}" class="flex_1 flex flex_align_center flex_pack_center {{slide === index? 'select_nav': ''}}">
+      <text>{{item}}</text>
+      <image src="{{(index === 1 && sortType === 'sale_asc') || (index === 2 && sortType === 'price_asc') || (index === 3 && sortType === 'collect_asc') ? '/image/sort_up.png': (index === 1 && sortType === 'sale_desc') || (index === 2 && sortType === 'price_desc') || (index === 3 && sortType === 'collect_desc')? '/image/sort_down.png': '/image/sort_default.png'}}"
+        wx:if="{{index !== 0}}" style="width: 40rpx; height: 40rpx;"></image>
+    </view>
+  </view>
+  <!-- 列表 -->
+  <view class="list_container flex" style="{{topok?'margin-top: 70rpx;':''}}" wx:if="{{listMsg[slide].length > 0}}">
+    <view wx:for="{{listMsg[slide]}}" bindtap='toProDetail' data-pid="{{item.pid}}" class="overflow_boxsizing font_12 flex flex_v" style="{{index %2 === 0? 'margin-right: 22rpx;': ''}}">
+      <view class="list_img_container">
+        <image src="{{item.pic || '/image/bkg_cover.jpg'}}"></image>
+      </view>
+      <view class="line_over_2 color_333" style="line-height:40rpx; height:80rpx; padding: 0 18rpx 0 10rpx;">
+        <text>
+        <text class="quanqiu" wx:if="{{item.isrushbuy}}" style="display: inline-block; vertical-align: middle;border-radius: 10rpx; background-color: orange; color: #fff; border: 0; padding:0 6rpx; margin-right: 10rpx;">限时抢购</text>{{item.name}}</text>
+      </view>
+      <view style="line-height:34rpx; margin-top: 10rpx; padding: 0 18rpx 0 10rpx;" class="flex flex_pack_justify_between">
+        <text class="color_000 font_weight" wx:if="{{item.salePrice}}">¥{{item.isrushbuy && item.rushbuy.specjson? filters.toFix(filters.JsonParse(item.rushbuy.specjson)[0].Price, 2) : filters.toFix(item.salePrice,2)}}</text>
+        <view style="color: #CDA86E;" wx:if="{{fxshopid && !ruid}}">
+          <text wx:if="{{item.commPrice}}">赚¥</text>
+          <text class="font_14" wx:if="{{item.commPrice}}">{{filters.toFix(item.commPrice, 2)}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <!--没有数据  -->
+  <view wx:if="{{page[slide] === 1 && listMsg[slide].length < 1}}" class="flex flex_v flex_align_center" style="margin-top: 200rpx; background-color: transparent;">
+    <view>
+      <image src="/image/nodata.png" style="width: 432rpx; height: 300rpx; margin-bottom: 20rpx;"></image>
+    </view>
+    <view class="color_999 font_14">
+      <text>抱歉，目前没有显示记录</text>
+    </view>
+  </view>
+  <!--没有更多了  -->
+  <view class="text_center" wx:if="{{page[slide] !== 1 && noMore[slide]}}" style="margin-top: 20rpx; background-color: transparent; line-height:60rpx;">
+    <text class="color_999 font_12" style="padding: 20rpx 0;">没有更多数据了</text>
+  </view>
+</view>
+<template is="goTop" data="{{showtop}}" />

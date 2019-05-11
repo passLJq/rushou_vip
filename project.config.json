@@ -1,0 +1,114 @@
+{
+	"description": "项目配置文件。",
+	"packOptions": {
+		"ignore": []
+	},
+	"setting": {
+		"urlCheck": true,
+		"es6": true,
+		"postcss": true,
+		"minified": true,
+		"newFeature": true
+	},
+	"compileType": "miniprogram",
+	"libVersion": "2.5.2",
+	"appid": "wx1890025f39d8bbd1",
+	"projectname": "rushouvip",
+	"isGameTourist": false,
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
+	"condition": {
+		"search": {
+			"current": -1,
+			"list": []
+		},
+		"conversation": {
+			"current": -1,
+			"list": []
+		},
+		"plugin": {
+			"current": -1,
+			"list": []
+		},
+		"game": {
+			"currentL": -1,
+			"list": []
+		},
+		"miniprogram": {
+			"current": 6,
+			"list": [
+				{
+					"id": -1,
+					"name": "创业礼包",
+					"pathName": "pages/productdetail/productdetail",
+					"query": "ruid=181011152608452179&pid=180705145836102241&packageid=180910161909349754 "
+				},
+				{
+					"id": 1,
+					"name": "创业礼包1",
+					"pathName": "pages/productdetail/productdetail",
+					"query": "ruid=180910163828384775&pid=180424201358848970&packageid=180910190806936266 "
+				},
+				{
+					"id": -1,
+					"name": "解冻",
+					"pathName": "pages/jiedong_pro/jiedong_pro",
+					"query": ""
+				},
+				{
+					"id": -1,
+					"name": "解冻",
+					"pathName": "pages/productdetail/productdetail",
+					"query": "ruid=181113111733078681&pid=181112180544116740"
+				},
+				{
+					"id": 4,
+					"name": "wangye",
+					"pathName": "pages/websouer/websouer",
+					"query": "url=https://i.rushouvip.cn/activity.html"
+				},
+				{
+					"id": -1,
+					"name": "wangye",
+					"pathName": "pages/other/voucher_center/voucher_center",
+					"query": "comid=181031103129369370 "
+				},
+				{
+					"id": 6,
+					"name": "登录",
+					"pathName": "pages/login/login",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "团长",
+					"pathName": "pages/tz/tz",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "我的邀请",
+					"pathName": "pages/myfans/myfans",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "海报",
+					"pathName": "pages/tz_haibao/tz_haibao",
+					"query": "",
+					"scene": null
+				},
+				{
+					"id": -1,
+					"name": "yshopset",
+					"pathName": "pages/yshopset/yshopset",
+					"query": "",
+					"scene": null
+				}
+			]
+		}
+	}
+}

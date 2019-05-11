@@ -1,0 +1,7 @@
+<!--pages/yshopapply/yshopapply.wxml-->
+<view class="ones">
+<image mode="widthFix" src="https://images.rushouvip.cn/WebApp/invite/v{{index+1}}.jpg" wx:for="{{[1,2,3,4,5,6,7,8,9,10,11,12]}}" class="applyimg"></image>
+</view>
+<button open-type="getUserInfo"  bindgetuserinfo="bindgetuserinfo" class="kaitong" style="{{isIphoneX?'padding-bottom:30rpx':''}}">立即开通</button>
+<!-- 新实习店主送优惠券弹窗 -->
+<new-user-prompt-box showShopCoupon="{{showShopCoupon}}" uid="{{uid}}" fxshopid="{{fxshopid}}" bindchangeShopCoupon="changeShopCoupon" wx:if="{{qiandao!='qiandao'}}"></new-user-prompt-box>

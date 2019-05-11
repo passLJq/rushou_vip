@@ -1,0 +1,32 @@
+<!--pages/yshopset/yshopset.wxml-->
+<view class='settou touitem'>
+<image src='../../image/queren.png'></image>
+<view class='toutitle'>
+<text>{{biaoti}}</text>
+<view class="xinxi">请完善店铺信息</view>
+</view>
+</view>
+<!-- 头部导航 -->
+<view class="xinxilistbox">
+<view class='touitem xix'>
+<text><text class="xin">*</text>店铺名称</text>
+<input placeholder='请输入您的店铺名称'  bindinput="bind1" value='{{shopname}}'></input>
+</view>
+<view class='touitem xix'>
+<text><text class="xin">*</text>邀请码</text>
+<input placeholder='请输入您的邀请码'  bindinput="bind2" value='{{code}}' type='number' maxlength='6'></input>
+</view>
+<view class='touitem xix'>
+<text><text class="xin">*</text>微信号</text>
+<input placeholder='请输入您的微信号码'  bindinput="bind3" value='{{wxnumber}}'></input>
+</view>
+<view class='touitem xix'>
+<text style="margin-left:20rpx">个性签名</text>
+<input placeholder='入手全球尖货，优选品质生活'  bindinput="bind4" value='{{notice}}' maxlength='20' style='flex:1'></input>
+</view>
+</view>
+<!-- 列表 -->
+<form bindsubmit="opens" report-submit="true" bindreset="formReset">
+  <button formType="submit" class='wxbtn open overflow_boxsizing' style="height: 86rpx; line-height: 86rpx; padding: 0;">确认开通</button>
+</form>
+<!-- <view class='wxbtn open' bindtap='opens'>确认开通</view> -->

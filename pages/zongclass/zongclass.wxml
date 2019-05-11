@@ -1,0 +1,45 @@
+
+<view class='item'>
+  <!-- 分类左边 -->
+  <scroll-view scroll-y class='left-class' style="height:{{phoneheigh}}">
+    <block wx:for="{{classdata}}">
+      <view style="height:{{left_height}}" class='left-lei' data-index="{{index}}" data-classid="{{item.cla.classid}}" wx:if="{{!classact[index]}}" bindtap='onchangacr'>{{item.cla.name}}</view>
+      <view style="height:{{left_height}}" class='left-lei left-leiact' data-index="{{index}}"  data-classid="{{item.cla.classid}}" wx:else bindtap='onchangacr'>{{item.cla.name}}</view>
+    </block>
+  </scroll-view>
+  <!-- 分类右边 -->
+    <scroll-view scroll-y class='right-class' style="height:{{phoneheigh}}">
+      <block wx:for="{{classdata}}">
+<!-- 分类右边轮播 -->
+  <swiper autoplay="false" interval="3000" duration="500" bindchange='chang' wx:if="{{classdata[index].cla.classimgs!=[]&&classact[index]}}">
+      <block wx:for="{{classdata[index].cla.classimgs}}" wx:for-index="ge" wx:for-item="imgli">
+      <swiper-item >
+        <image src="{{imgli.classimg}}" mode='scaleToFill' />
+      </swiper-item>
+      </block>
+  </swiper>
+  <!-- 分类图标 -->
+      <view data-index="{{index}}" wx:if="{{classact[index]}}">
+        <block wx:for="{{classdata[index].node}}" wx:for-index="ids" wx:for-item="zclass">
+        <view class='right-cun' data-classid="{{zclass.cla.classid}}" bindtap='goproductlist'>
+          <view class='right-poudc'>
+            <image src='{{zclass.cla.image}}'></image>
+            <text>{{zclass.cla.name}}</text>
+          </view>
+        </view>
+        </block>
+        </view>
+
+    <view data-index="{{index}}" wx:else style="display:none">
+        <block wx:for="{{classdata[index].node}}" wx:for-index="ids" wx:for-item="zclass">
+        <view class='right-cun' data-classid="{{zclass.cla.classid}}">
+          <view class='right-poudc'>
+            <image src='{{zclass.cla.image}}' ></image>
+            <text>{{zclass.cla.name}}</text>
+          </view>
+        </view>
+        </block>
+        </view>
+      </block>
+    </scroll-view>
+</view>

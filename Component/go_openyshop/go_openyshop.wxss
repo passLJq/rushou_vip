@@ -1,0 +1,10 @@
+@import "/app.wxss";
+.shopzhezao{position: fixed;z-index: 9999999;top: 0;bottom: 0;width: 100%;background-color: rgba(0,0,0,0.6)}
+.shopwive{width: 80%;position: fixed;z-index: 99999999;top:15%;left:10%;background-color:rgba(0,0,0,0);}
+.titleview{position: absolute;width: 100%;top: 51%;left: 0;text-align: center}
+.titleview view:nth-child(1){font-size: 36rpx;color: rgb(209, 175, 111);font-weight: 700}
+.titleview view:nth-child(2){font-size: 28rpx;color: rgb(234, 217, 203);margin-top: 30rpx}
+.titleview view:nth-child(3){font-size: 28rpx;color: rgb(234, 217, 203)}
+.titleview view:nth-child(4){width: 60%;margin: 0 auto;margin-top:30rpx}
+.shopimagebox{position: relative}
+.shopwive image{width: 100%;}

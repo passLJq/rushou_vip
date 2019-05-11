@@ -1,0 +1,2 @@
+<!--pages/websouer/websouer.wxml-->
+<web-view src="{{url}}"></web-view>

@@ -1,0 +1,8 @@
+<!--pages/frinedsharp/frinedsharp.wxml-->
+<import src="../../Component/sharebox/sharebox.wxml" />
+
+<view class="backimg">
+<image src="https://images.rushouvip.cn/IMG/chu1.png" mode='widthFix'></image>
+<view class="yaoqinbtn"bindtap="goshare">立即邀请 赚现金红包</view>
+</view>
+<template is="sharebox" data="{{showshare,haibao:haibao,c_width:c_width,c_height:c_height}}" />

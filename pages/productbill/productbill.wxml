@@ -1,0 +1,85 @@
+<!--pages/productbill/productbill.wxml-->
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<view>
+  <view class="nav_container overflow_boxsizing flex font_14 color_333">
+    <view class="overflow_boxsizing slider_list {{slide === 0? 'selected': ''}}" bindtap='changeSlide' data-idx="0">
+      <text>店铺商品</text>
+    </view>
+    <view class="overflow_boxsizing slider_list {{slide === 1? 'selected': ''}}" bindtap='changeSlide' data-idx="1">
+      <text>清单管理</text>
+    </view>
+    <view class="line_red translateXY transition_ease_in_out_fast" style="left: {{slide === 0? '25%': '75%'}};"></view>
+  </view>
+  <!-- 店铺商品列表 -->
+  <product-list slide="{{slide}}" billMaxCounts="{{billMaxCounts}}" shopList="{{shopList}}" binddeleteList="deleteList" bindmovePro="movePro"></product-list>
+  <!-- 清单列表 -->
+  <view wx:if="{{slide === 1}}" class="box_container overflow_boxsizing">
+    <view class="list_container overflow_boxsizing padding16 font_14" style="height: 432rpx;" wx:for="{{billList}}" wx:key="">
+      <view class="top_billlist_container overflow_boxsizing color_333 flex flex_v flex_pack_justify_between">
+        <view class="line_over_1">
+          <text class="font_18 font_weight">{{item.name}}</text>
+        </view>
+        <view class="line_over_1">
+          <text>{{item.sign}}</text>
+        </view>
+      </view>
+      <view class="center_billlist_container overflow_boxsizing flex_align_center">
+        <view class="flex" wx:if="{{item.itemlist.length > 0}}">
+          <view wx:for="{{item.itemlist}}" style="width: 160rpx; height: 160rpx; position: relative; {{idx !== 0? 'margin-left: 18rpx;': ''}}" wx:key="" wx:for-item="list" wx:for-index="idx" wx:if="{{idx < 4}}" bindtap='toBillEdit' data-prolistid="{{item.prolistid}}">
+            <image src="{{list.proimg || '/image/bkg_cover.jpg'}}" style="width: 100%; height: 100%;"></image>
+            <view class="flex flex_align_center flex_pack_center color_fff font_13" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; background-color: rgba(51,51,51,0.6);" wx:if="{{(item.itemlist.length <= 4)? idx === (item.itemlist.length - 1): idx === 3}}">
+              <text>共{{item.count}}件商品</text>
+            </view>
+          </view>
+        </view>
+        <view class="flex flex_v flex_pack_justify_around" wx:if="{{item.itemlist.length < 1}}" style="color: #CDA86E;width: 100%; height: 100%;">
+          <view class="text_center">
+            <text>此清单内还没有商品哦，赶紧去选购吧~</text>
+          </view>
+          <view class="text_center">
+            <view class="btn_toselect" hover-class="btn_click" bindtap='toClass'>
+              <text>去选购</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <view class="bottom_billlist_container overflow_boxsizing flex flex_align_center flex_pack_justify_between">
+        <view bindtap='deleteBill' data-prolistid="{{item.prolistid}}">
+          <text class="iconfont icon-shanchu" style="font-size: 40rpx; color: #999; padding: 24rpx;"></text>
+        </view>
+        <view class="flex font_14 color_999 list_btn_container flex_align_center">
+          <view bindtap='toBillEdit' data-prolistid="{{item.prolistid}}">
+            <text>编辑清单</text>
+          </view>
+          <view class="bill_btn_contianer overflow_boxsizing" bindtap="showIndex" data-prolistid="{{item.prolistid}}" data-idx="{{index}}">
+            <text>{{ishomepageshow[index]? "下架": "上架"}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 底部 -->
+
+  <view wx:if="{{slide === 1}}" class="bill_btn_add flex flex_pack_center" style="{{isIphoneX?'padding-bottom: 48rpx':''}}">
+    <view bindtap='toAddBill'>
+      <text>新建清单</text>
+    </view>
+  </view>
+  <view class="flex flex_v flex_pack_justify_around font_14" wx:if="{{(slide === 0 && shopList.length < 1) || (slide === 1 && billList.length < 1)}}" style="margin-top: 200rpx;color: #CDA86E;width: 100%;">
+    <view class="text_center">
+      <image src="/image/no_pro_list_1.png" style="width: 300rpx; height: 300rpx;margin: 0 auto;"></image>
+    </view>
+    <view class="text_center color_999" style="margin-bottom: 20rpx;">
+      <text>{{slide === 0?'此店铺内还没有商品哦，赶紧去选购吧~': '没有清单喔，赶紧去添加清单吧'}}</text>
+    </view>
+    <view class="text_center" wx:if="{{slide === 0}}">
+      <view class="btn_toselect" hover-class="btn_click" bindtap='toAddMsg'>
+        <text>去选购</text>
+      </view>
+    </view>
+  </view>
+  <!--没有更多了  -->
+  <view class="text_center" wx:if="{{slide === 0 && noMore}}" style="background-color: transparent; line-height:60rpx;">
+    <text class="color_999 font_12" style="padding: 20rpx 0;">没有更多数据了</text>
+  </view>
+</view>

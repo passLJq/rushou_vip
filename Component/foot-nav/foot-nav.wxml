@@ -1,0 +1,27 @@
+<!--Component/foot-nav/foot-nav.wxml-->
+<view class="footbox"></view>
+<view class="footnav">
+  <view class="footli" bindtap='gowhere' data-url='/pages/index/index' data-index='0'>
+    <image src="/image/shouye1.png" wx:if="{{clickindex==0}}"></image>
+    <image src="/image/shouye.png" wx:else></image>
+    <view class="{{clickindex==0?'activeindex':''}}">超级IP店</view>
+  </view>
+  <view class="footli" bindtap='gowhere' data-index='1' data-url='/pages/class/class'>
+    <image src="/image/fenlei1.png" wx:if="{{clickindex==1}}"></image>
+    <image src="/image/fenlei.png" wx:else></image>
+    <view class="{{clickindex==1?'activeindex':''}}">优选</view>
+  </view>
+  <view class="footli" bindtap='gowhere' data-index='2' data-url='/pages/shoppingcar/shoppingcar'>
+  <view class="carbox">
+    <text class="translateX_icon" wx:if="{{cartCounts}}">{{cartCounts}}</text>
+    <image src="/image/gouwuche1.png" wx:if="{{clickindex==2}}"></image>
+    <image src="/image/gouwuche.png" wx:else></image>
+  </view>
+    <view class="{{clickindex==2?'activeindex':''}}">购物车</view>
+  </view>
+  <view class="footli" bindtap='gowhere' data-index='3' data-url='/pages/wode/wode'>
+    <image src="/image/wode1.png" wx:if="{{clickindex==3}}"></image>
+    <image src="/image/wode.png" wx:else></image>
+    <view class="{{clickindex==3?'activeindex':''}}">我的</view>
+  </view>
+</view>

@@ -1,0 +1,42 @@
+<!--Component/new-user-prompt-box/new-user-prompt-box.wxml-->
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<!-- 新实习店主送优惠券 -->
+<view class="new_shop_coupon_container" catchtouchmove='true' wx:if="{{isLoading && NewshowShopCoupon}}" bindtap='closeShopCoupon' data-type="close" catchtouchmove='true'></view>
+<view class="new_shop_coupon_box flex flex_v" animation="{{animationData}}" wx:if="{{isLoading && NewshowShopCoupon}}" catchtouchmove='true'>
+  <view>
+    <view wx:if="{{fxshopid}}" bindtap='closeShopCoupon' data-type="close">
+      <text class="iconfont icon-49shurushanchu-1 close_btn" style="font-size: 58rpx;"></text>
+    </view>
+    <view hover-class='close_hove' wx:if="{{!uid}}" bindtap='closeShopCoupon' data-type="close" data-name="btnName">
+      <text class="close_btn get_btn">立即领取</text>
+    </view>
+  </view>
+  <view class="color_333 font_20 font_weight coupon_shop_top flex flex_pack_center">
+    <text>属于您的新人福利,请查收</text>
+  </view>
+  <view class="coupon_shop_list flex flex_v" wx:for="{{couponMsg}}" wx:key="" wx:if="{{index < 3}}">
+    <view style="width: 52rpx; height: 52rpx; background-color: #FCD89D; border-radius: 50%; display:inline-block; position: absolute; left: 0; top: 50%; transform: translate(-50%, -50%);"></view>
+    <view class="coupon_content flex flex_pack_justify_between">
+      <view class="flex_1 flex overflow_boxsizing">
+        <view>
+          <text style="color: #FF422C; font-size: 28rpx;position: relative; top: 5rpx;">￥</text>
+        </view>
+        <view>
+          <text style="color: #FF422C; font-size: 60rpx;">{{filters.toFix(item.facevalue, 2)}}</text>
+        </view>
+      </view>
+      <view class="font_14 flex flex_v flex_pack_justify_around overflow_boxsizing" style="width: 200rpx;">
+        <view class="line_over_1" style="color: #FF422C;">
+          <text>新人有礼优惠券</text>
+        </view>
+        <view class="color_999 line_over_1" style="width: 200rpx;">
+          <text>满{{item.uselimit}}元可使用</text>
+        </view>
+      </view>
+    </view>
+    <view class="flex_1 font_12 color_999">
+      <text>有效期至{{filters.replaceCouponDate(item.userendtime)}}</text>
+    </view>
+  </view>
+
+</view>

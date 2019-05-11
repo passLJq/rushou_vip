@@ -1,0 +1,349 @@
+<!--pages/productdetail/productdetail.wxml-->
+<import src="../../Component/sharebox/sharebox.wxml" />
+<import src="../../wxParse/wxParse.wxml" />
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<view wx:if="{{!firstLoad}}" style="width: 200%; height: 100%; position: fixed; top:0; left:0; z-index: 99999999999; background-color: #fff;"><loading wx:if="{{!firstLoad}}">加载中</loading></view>
+<view bindtouchmove="handlerMove" bindtouchend="handlerEnd" id="box_container" style=" {{isIphoneX? 'padding-bottom:50rpx;': ''}}">
+  <back-my-shop ruid="{{ruid}}" uid="{{uid}}" fxshopid="{{fxshopid}}"></back-my-shop>
+  <!-- 详情图片轮播  -->
+  <view style="position: relative;">
+    <view class="translateXY" style="position: absolute; left: 50%; top: 50%;" wx:if="{{msg.stock < 1}}">
+      <image src="/image/shouwan.png" style=" width: 240rpx; height: 240rpx;"></image>
+    </view>
+    <view class='backshouye' wx:if="{{imgUrls.length>0}}" bindtap="downloadImg">
+      <text class="iconfont icon-clouddownloadyunxiazai"></text> 
+    </view>
+    <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" circular="{{circular}}" duration="{{duration}}" style="height: 750rpx;" wx:if="{{imgUrls.length>1}}">
+      <block wx:for="{{imgUrls}}">
+        <swiper-item>
+          <image src="{{item}}" class="slide-image" style="width: 100%; height: 750rpx;" />
+        </swiper-item>
+      </block>
+    </swiper>
+    <view wx:else>
+      <image src="{{imgUrls[0]}}" class="slide-image" style="width: 100%; height: 750rpx;" />
+    </view>
+  </view>
+  <!-- 限时抢购信息 -->
+  <view wx:if="{{msg.isrushbuy}}">
+    <!-- 预告 -->
+    <view class="overflow_boxsizing flex flex_align_center flex_pack_justify_between rushBuy_preview_container color_fff" wx:if="{{canShowRushBuy === 2}}">
+      <view class="flex">
+        <view class="font_14 rushBuy_preview_title flex flex_align_center flex_pack_center">
+          <text>秒杀预告</text>
+        </view>
+        <view class="font_weight">
+          <text class="font_14">¥</text>
+          <text class="font_20">{{filters.toFix(buyPrice,2)}}</text>
+        </view>
+      </view>
+      <view class="font_12">
+      <!--  <text wx:if="{{canShowRushBuy === 2}}">预计{{countDownTime.day + '天' + countDownTime.hour + '时' + countDownTime.minute + '分' + countDownTime.second + '秒' }}开抢</text> -->
+      <text wx:if="{{canShowRushBuy === 2}}">预计{{timeFree.DM + '月' + timeFree.DD + '日' +' '+ timeFree.TH + ':' +timeFree.TM }}开抢</text>
+      </view>
+    </view>
+    <!-- 进行中 -->
+    <view wx:if="{{canShowRushBuy === 1}}" class="overflow_boxsizing flex flex_v rushBuy_ongoing_container color_fff">
+      <view class="rushBuy_ongoing_top flex flex_pack_justify_between flex_align_center">
+        <view class="flex">
+          <view class="font_weight">
+            <text class="font_14">¥</text>
+            <text class="font_20">{{filters.toFix(buyPrice,2)}}</text>
+          </view>
+          <view class="" wx:if="{{fxshopid && !ruid}}">
+            <text class="font_12" style="padding: 0 10rpx 0 36rpx;">赚</text>
+            <text class="font_14">{{filters.toFix(msg.commPrice, 2)}} 元</text>
+          </view>
+        </view>
+        <view>
+          <text class='free_time'>{{countDownTime.hour}}</text>
+          <text> : </text>
+          <text class='free_time'>{{countDownTime.minute}}</text>
+          <text> : </text>
+          <text class='free_time'>{{countDownTime.second}}</text>
+        </view>
+      </view>
+      <view class="rushBuy_ongoing_bottom flex_1 flex flex_pack_justify_between">
+        <view class="flex">
+          <view class="font_10 rushBuy_ongoing_title flex flex_pack_center flex_align_center">
+            <!-- <text wx:if="{{daysnow<=14&&monthsnow==12}}">双12价</text> -->
+            <text>抢购价</text>
+          </view>
+          <view class="font_12" style="opacity: .6;">
+            <text>原价￥{{filters.toFix(proPrice, 2)}}</text>
+          </view>
+        </view>
+        <view class="font_weight font_12 flex">
+          <text>距离恢复原价还有</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!--商品信息  -->
+  <view>
+    <view class="flex flex_v product_msg_container overflow_boxsizing flex_pack_justify_between" style="{{canShowRushBuy === 1? 'height: 140rpx;': ''}}">
+      <view class="flex flex_pack_justify_between flex_align_center">
+        <view class="product_names line_over_2 overflow_boxsizing" style="{{isopenshop?'':'width:100%'}}">
+          <text class="quanqiu" wx:if="{{msg.iscross}}"><text>全球购</text>包邮包税</text>
+          <text>{{msg.name}}</text>
+        </view>
+        <view class="flex_1 flex flex_v" style="text-align: center;" data-type="billList" bindtap="showSku" wx:if="{{isopenshop && !ruid}}">
+          <text class="iconfont icon-bill" style="font-size: 80rpx; color: #bbb;"></text>
+          <text class="font_10 color_999" style="position: relative; top: -20rpx;">加入清单</text>
+        </view>
+      </view>
+      <view class="flex flex_pack_justify_between all_price_container" wx:if="{{canShowRushBuy !== 1}}">
+        <view class="flex flex_align_center">
+          <view class="new_price_container">￥
+            <text class="new_price">{{proPrice}}</text>
+          </view>
+          <view class="old_price" wx:if="{{msg.marketingprice}}">
+            <text class="font_14 color_999">￥{{marketingprice}}</text>
+          </view>
+        </view>
+        <view wx:if="{{fxshopid && !ruid}}">
+          <text class="font_16" style="color: #FF422C;">赚<text class="font_14">￥</text>{{zuan}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 全球购 -->
+    <view class="list_nav_container padding16" wx:if="{{msg.iscross}}" data-type="customtext" bindtap="showSku">
+      <view class=" flex flex_pack_justify_between font_12 color_999">
+        <view class="prisitem">
+          <text>进口税：</text>
+          <text>{{msg.customtext}}{{filters.quanqiu(msg.taxrate,2)}}</text>
+          <i class="iconfont icon-buoumaotubiao21"></i>
+        </view>
+      </view>
+    </view>
+    <!-- 分享有奖 -->
+    <view style='background:#fff' wx:if="{{msg.sharetimes<3&&shrespro&&uid&&fxshopid&&!ruid}}">
+      <view class="fenshare f_item">
+          <view class="f_item">
+          <view class="f_p1">分享有奖</view>
+          <text class="f_p2">分享商品给好友，即可领红包哦~</text>
+          </view>
+          <view class="f_p3 f_item" bindtap='goshare'>去分享<i class="rights-arrow"></i></view>
+        </view>    
+    </view>
+    <!--销量 库存  -->
+    <view class="list_nav_container padding16">
+      <view class=" flex flex_pack_justify_between font_12 color_999">
+        <view>
+          <text>销量：</text>
+          <text>{{msg.chenjiaonum}}</text>
+        </view>
+        <view>
+          <text>库存：</text>
+          <text>{{msg.stock}}</text>
+        </view>
+      </view>
+    </view>
+    <!--保障  -->
+    <view class="list_nav_container padding16 ensure_container" hover-class="hover_btn" data-type="ensure" bindtap="showSku" wx:if="{{msg.commitmentlist.length > 0}}">
+      <view class=" flex font_12 color_999">
+        <view class="flex flex_align_center flex_pack_center" style="width: 33.3333%;" wx:for="{{msg.commitmentlist}}" wx:if="{{index<3}}">
+          <image src="{{item.logoimg}}"></image>
+          <text>{{item.name}}</text>
+        </view>
+      </view>
+    </view>
+    <!-- 优惠券 -->
+    <view class="coupon" bindtap="showcoupon" hidden="msg.propackageprice" wx:if="{{(uid && (hasGet || unGet))}}">
+      <view>
+        <text>{{unGet ? '领券' : '已领'}}</text>
+        <text class="t1">{{unGet[0] ? unGet[0].companyname : hasGet[0] ? hasGet[0].companyname : ''}}</text>
+        <text class="t2" wx:if="{{unGet && index<2}}" wx:for="{{unGet}}">{{'满' + item.uselimit + '减' + item.facevalue + '元' }}</text>
+        <text class="t2" wx:if="{{!unGet && hasGet && index<2}}" wx:for="{{hasGet}}">{{'满' + item.uselimit + '减' + item.facevalue + '元' }}</text>
+      </view>
+      <view class="r icon-right iconfont"></view>
+    </view>
+    <!-- 没登录优惠券 -->
+    <view class="coupon" bindtap="showcoupon" wx:if="{{!uid}}">
+      <view>
+        <image class="mon" src="../../image/money.png"></image>
+        <text style="color: #333">注册就送100元购物礼包</text>
+      </view>
+      <view class="log" style="">立即注册</view>
+      <view class="r icon-right iconfont"></view>
+    </view>
+    <!--规格  -->
+    <view class="flex flex_pack_justify_between padding16 font_14 sku_container" hover-class='hover_btn' data-type="sku" bindtap='showSku' wx:if="{{msg.openspec}}">
+      <view class="flex">
+        <view style="width: 120rpx;" class="color_999">
+          <text>已选择</text>
+        </view>
+        <view class="flex_1 color_333 overflow_boxsizing">
+          <text>{{skutext}}</text>
+        </view>
+      </view>
+      <view>
+        <text class="more_icon"></text>
+      </view>
+    </view>
+    <!--店铺信息  -->
+    <view class="flex flex_v flex_pack_justify_around shop_msg_container overflow_boxsizing padding16 color_333 font_14" wx:if="{{isopenshop}}">
+      <view class="flex flex_pack_justify_between">
+        <view class="flex flex_align_center flex_pack_justify_between" style="max-width: 60%;">
+          <view class="shop_pic_container">
+            <image src="{{msg.yuserphoto || msg.shoplogo || '/image/logoshou.png'}}"></image>
+          </view>
+          <view class="flex_1 line_over_1" style="padding: 0 20rpx;">
+            <text>{{msg.yusername || msg.shopname}}</text>
+          </view>
+          <view class="businessing_container">
+            <text>营业中</text>
+          </view>
+        </view>
+        <view hover-class='hover_btn' class="flex flex_align_center color_999 font_12" style="padding: 0 32rpx; border: 2rpx solid #ddd; border-radius:40rpx;" bindtap="toIndex">
+          <text>进入店铺</text>
+        </view>
+      </view>
+      <view class=" overflow_boxsizing" style="background-color: #F6F6FA; padding: 10rpx; " wx:if="{{msg.ywdnotice}}" bindtap="toIndex">
+        <text>{{msg.ywdnotice}}</text>
+      </view>
+    </view>
+  </view>
+  <!--商品详情  -->
+  <view class="product_imgs_container">
+    <view class="product_imgs_title padding16 font_17" >商品详情</view>
+    <view class='font_14 color_333'>
+      <template is="wxParse" data="{{wxParseData:description.nodes}}" />
+    </view>
+  </view>
+<!-- 资历认证 -->
+  <view class="gongshang" bindtap='gogongshang'>
+   <text>工商资质</text>
+   <image src="../../image/gongshang.png"></image>
+  </view>
+  <!--规格弹窗  -->
+  <view class="sku_prompt_container" hidden="{{!skuBoxBottom}}" bindtap="showSku"></view>
+  <view class="sku_prompt_content transition_ease_in_out" style="bottom:{{skuBoxBottom? '0px': '-100%'}}; padding-bottom: {{isIphoneX? '48rpx;': ''}}" data-id="box_container">
+    <view class="flex sku_prompt_top overflow_boxsizing">
+      <view class="box_proimg_container">
+        <image src="{{msg.pic?msg.pic:'/image/bkg_cover.jpg'}}"></image>
+      </view>
+      <view class="flex_1 flex flex_v flex_pack_justify_between sku_top_right">
+        <view class="color_333 font_14 line_over_2" style="line-height: 40rpx;">
+          <text>{{msg.name}}</text>
+        </view>
+        <view class="flex flex_align_center">
+          <view class="new_price_container">￥
+            <text class="new_price">{{filters.toFix(buyPrice*buyCounts,2)}}</text>
+          </view>
+          <view class="old_price" wx:if="{{msg.marketingprice}}">
+            <text class="font_14 color_999">￥{{filters.toFix(msg.marketingprice*buyCounts,2)}}</text>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:for="{{spec}}">
+      <view class="product_imgs_title padding16 font_14">{{item.specname}}</view>
+      <view class="padding16">
+        <text class="btn_sku {{filters.isHasMsg(specval, index, texts.valueid)?'actived_btn_sku': ''}}" wx:for="{{filters.toJson(item.spectext)}}" wx:for-index="idx" wx:for-item="texts" data-valueid="{{texts.valueid}}" data-len="{{index}}" bindtap="changSku">{{texts.ctmtext}}</text>
+      </view>
+    </view>
+    <view class="product_imgs_title padding16 font_14">数量</view>
+    <view class="padding16 flex flex_align_center" style="margin-bottom:20rpx;">
+      <text class="iconfont icon-jian btn_jian {{(minCounts === 0 || buyCounts > minCounts) && buyCounts > 1? '': 'btn_add_jian_nomore'}}" data-counts="-1" bindtap="changeCounts"></text>
+      <text class="buy_counts">{{buyCounts}}</text>
+      <text class="iconfont icon-add btn_add {{(maxCounts === 0 && buyCounts < nowStock) || (buyCounts < maxCounts && buyCounts < nowStock)? '': 'btn_add_jian_nomore'}}" data-counts="1" bindtap="changeCounts"></text>
+      <view wx:if="{{msg.rushbuy}}" style='font-size:28rpx'><view wx:if="{{msg.rushbuy.buylimit}}">(限购{{msg.rushbuy.buylimit}}件)</view></view>
+    </view>
+    <view class="flex flex_pack_justify_between flex_align_center font_14 overflow_boxsizing" style="height: 110rpx; padding: 20rpx 32rpx;">
+      <view class="btn_addCart" bindtap='addCart'>
+        <text>加入购物车</text>
+      </view>
+      <view class="btn_buy" bindtap="buyNow" wx:if="{{canShowRushBuy !== 2}}">
+        <text>立即购买</text>
+      </view>
+    </view>
+  </view>
+  <!-- 服务弹窗  -->
+  <view class="sku_prompt_container" hidden="{{!ensureBoxBottom}}" bindtap="showSku"></view>
+  <view class="sku_prompt_content transition_ease_in_out" style="bottom:{{ensureBoxBottom? '0px': '-100%'}}; padding-bottom: {{isIphoneX? '48rpx;': ''}}" data-id="box_container">
+    <view class="ensure_box">
+      <view class="text_center font_17 color_333">服务承诺</view>
+    </view>
+    <view class="ensure_box_container">
+      <view wx:for="{{msg.commitmentlist}}" wx:key="name">
+        <view class="flex flex_align_center ensure_title">
+          <image src="{{item.logoimg}}"></image>
+          <text>{{item.name}}</text>
+        </view>
+        <view class="font_12 color_999" style="padding-left: 60rpx;">
+          <text>{{item.content}}</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  
+  <!-- 清单弹窗  -->
+  <view class="sku_prompt_container" hidden="{{!billBoxBottom}}" bindtap="showSku"></view>
+  <view class="sku_prompt_content transition_ease_in_out font_14 color_333" style="bottom:{{billBoxBottom? '0px': '-100%'}}; padding-bottom: {{isIphoneX? '68rpx;': '20rpx'}}" data-id="box_container">
+    <view class=" padding16 overflow_boxsizing bill_title_container">
+      <view class="bottom_border overflow_boxsizing flex flex_pack_justify_between">
+        <view class="">
+          <text>选择清单</text>
+        </view>
+        <view class="flex flex_align_center" bindtap='toAddBill'>
+          <text class="iconfont icon-add1" style="font-size: 30rpx; color: #CDA86E;margin-right: 10rpx;"></text>
+          <text>新建清单</text>
+        </view>
+      </view>
+    </view>
+    <scroll-view scroll-y style="height: 360rpx;">
+      <view class="bill_list_item" wx:for="{{billList}}" hover-class='hover_btn' wx:key="" bindtap='addBillList' data-prolistid="{{item.prolistid}}">
+        <view class="overflow_boxsizing flex flex_align_center">
+          <view class="bill_list_img_container">
+            <image src="{{item && item.itemlist[0].proimg? item.itemlist[0].proimg: '/image/bkg_cover.jpg'}}"></image>
+          </view>
+          <view class="flex_1 line_over_1">
+            <text>{{item.name}}</text>
+          </view>
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <!--底部按钮  -->
+  <view class="footer_container flex flex_pack_justify_between flex_align_center" style="{{isIphoneX?'padding-bottom:68rpx; height:158rpx; ':''}}">
+    <view class="flex flex_pack_justify_around" style="width: 30%">
+      <view class="flex flex_v" bindtap="toIndex">
+        <text class="iconfont icon-shop"></text>
+        <text class="font_10 color_333">进店铺</text>
+      </view>
+      <view class="flex flex_v" style="position: relative;" bindtap="toCart">
+        <text class="iconfont icon-cart"></text>
+        <text class="translateX_icon" style="top: -10%;" wx:if="{{cartCounts}}">{{cartCounts}}</text>
+        <text class="font_10 color_333">购物车</text>
+      </view>
+    </view>
+    <view class="flex_1 flex flex_pack_justify_between" style="padding-left: 10rpx;">
+      <view class="btn_addCart font_14" style="width: {{fxshopid && !ruid?'176rpx;': '80%;margin: 0 auto;'}}" data-type="sku" bindtap="showSku">
+        <text>购买</text>
+      </view>
+      <view class="btn_buy font_14" bindtap='goshare' wx:if="{{fxshopid && !ruid}}">
+        <text>分享（赚￥{{zuan}}）</text>
+      </view>
+    </view>
+  </view>
+  <!-- //开店礼包按钮组 -->
+  <!-- <view class="footer_container flex flex_pack_justify_between flex_align_center" style="{{isIphoneX?'padding-bottom:68rpx; height:158rpx; ':''}}" wx:else>
+    <view class="wxbtn" style="width:70%;padding:20rpx 0;" data-type="sku" bindtap="showSku">立即购买</view>
+  </view> -->
+  <template is="sharebox" data="{{showshare, zuan: zuan,haibao:haibao}}" />
+
+  <!-- 全球购弹窗 -->
+  <view class="sku_prompt_container " hidden="{{!custom}}" bindtap="showSku"></view>
+  <view class="sku_prompt_content transition_ease_in_out quanqius" style="bottom:{{custom? '0px': '-100%'}}; padding-bottom: {{isIphoneX? '48rpx;': ''}}" data-id="box_container">
+    <template is="wxParse" data="{{wxParseData:exptaxation.nodes}}" />
+  </view>
+  <!-- 上下架 -->
+  <view animation="{{animationData}}" style="text-align: right;position:fixed; left: -60px;border-radius:0px 200rpx 200rpx 0px;box-shadow: 0 -1rpx 10px #ccc; bottom: {{isIphoneX?'180rpx':'130rpx'}}" wx:if="{{fxshopid && !ruid && isopenshop}}" catchtap="addpro">
+    <text class="btn_getPro color_fff font_14 text_center">{{!isup? '上架': '下架'}}</text>
+  </view>
+
+
+</view>
+<coupon id="coupon" style="{{showCoupon ? 'display: block' : 'display: none'}}" rbid="{{msg.rushbuy.rushbuyid}}" pid="{{msg.productid}}" companyid="{{msg.companyid}}"  bind:close="showcoupon" refresh="{{showCoupon}}"></coupon>

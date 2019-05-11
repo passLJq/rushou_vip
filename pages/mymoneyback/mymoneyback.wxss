@@ -1,0 +1,22 @@
+/* pages/mymoneyback/mymoneyback.wxss */
+@import "../../common/iconfont.wxss";
+@import "../../Component/goapp/goapp.wxss";
+
+page{background-color: #fff}
+.itemmo {
+  display: flex;
+  align-items: center;
+}
+.touime{  width: 85%;
+  margin: 0 auto;
+  background: linear-gradient(133.7deg, rgba(255, 221, 164, 1), rgba(192, 150, 90, 1));
+  border-radius: 8px;
+  justify-content: space-between;
+  padding: 80rpx 30rpx;
+  color: #fff;
+  margin-top: 40rpx}
+.touime text{color: #fff;border: 1px solid #fff;padding: 10rpx 40rpx;border-radius: 15px;font-size: 28rpx}
+.toua view:nth-child(1){font-size: 24rpx;margin-bottom: 20rpx}
+.toua view:nth-child(2){font-size: 60rpx;}
+.zili{justify-content: space-between;font-size: 28rpx;margin: 0 30rpx;padding: 28rpx 0;border-bottom: 1px solid #F6F6FA}
+.is{margin-right: 10rpx;color:#999;font-size: 36rpx}

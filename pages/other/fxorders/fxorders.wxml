@@ -1,0 +1,54 @@
+<!--pages/other/fxorders/fxorders.wxml-->
+<view>
+  <!-- 搜索 -->
+  <search bindsearchmsg="getSearchMsg" searchplaceholder="搜索订单"></search>
+  <!-- NAV -->
+  <view class="nav_container overflow_boxsizing flex font_14 color_333">
+    <view class="overflow_boxsizing slider_list" bindtap='changeSlide' data-idx="{{index}}" wx:for="{{navList}}" wx:key="">
+      <text class="{{slide === index? 'color_selected': ''}} transition_ease_in_out_fast">{{item}}</text>
+    </view>
+    <view class="line_red translateXY transition_ease_in_out_fast" style="left: {{(slide * 100/navList.length) + (100/navList.length/2)+'%'}};"></view>
+  </view>
+  <!-- 列表 -->
+  <view class="font_14 color_333 list_box" style="margin-top: 170rpx;">
+    <view class="list_container padding16 overflow_boxsizing" wx:for="{{listMsg[slide]}}" wx:key="">
+      <view class="order_id">
+        <text>订单编号: </text>
+        <text>{{item.orderid}}</text>
+      </view>
+      <view class="overflow_boxsizing order_container flex" bindtap='toDetail' data-orderid="{{item.orderid}}">
+        <view class="order_user_pic">
+          <image src="{{item.userimg? item.userimg: '/image/man.jpg'}}"></image>
+        </view>
+        <view class="flex_1 flex flex_v flex_pack_justify_between">
+          <view class="flex flex_pack_justify_between">
+            <view><text>{{item.username}}</text></view>
+            <view class="font_17" style="color: #CDA86E;"><text>{{item.comtype === '已退款' ? item.commision : (item.commision >= 0? '+' + item.commision: '-' + item.commision)}}</text></view>
+          </view>
+          <view class="flex flex_pack_justify_between font_12 color_999">
+            <view><text>{{item.createtime}}</text></view>
+            <view><text>{{item.comtype}}</text></view>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+
+    <!--没有数据  -->
+  <view wx:if="{{page[slide] === 1 && listMsg[slide].length < 1}}" class="flex flex_v flex_align_center" style="margin-top: 200rpx; background-color: transparent;">
+    <view>
+      <image src="/image/nodata.png" style="width: 432rpx; height: 300rpx; margin-bottom: 20rpx;"></image>
+    </view>
+    <view class="color_999 font_14">
+      <text>抱歉，目前没有显示记录</text>
+    </view>
+  </view>
+  <!--没有更多了  -->
+  <view class="text_center" wx:if="{{page[slide] !== 1 && noMore}}" style="margin-top: 20rpx; background-color: transparent; line-height:60rpx;">
+    <text class="color_999 font_12" style="padding: 20rpx 0;">没有更多数据了</text>
+  </view>
+
+
+
+
+</view>

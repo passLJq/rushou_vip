@@ -1,0 +1,6 @@
+<!--Component/goTop/goTop.wxml-->
+<template name="goTop">
+<view class='waibu' wx:if="{{showtop}}">
+<image src='../../image/gotop.png' bindtap='goTops'></image>
+</view>
+</template>

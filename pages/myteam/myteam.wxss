@@ -1,0 +1,21 @@
+/* pages/myteam/myteam.wxss */
+@import "../../Component/goapp/goapp.wxss";
+.box_container>.list_container:nth-child(1){margin-top: 4rpx;}
+.list_container{background-color: #fff; padding: 0 32rpx 0; margin-bottom: 10rpx; width: 100%; height: 158rpx;}
+.list_top_container{width: 100%; height: 156rpx; /**border-bottom: 2rpx solid #F6F6FA;**/ padding: 30rpx 0;}
+.list_pic_container{width: 122rpx; height: 100%; position: relative;}
+.list_pic_container>image{width: 96rpx; height: 96rpx; border-radius: 50%;}
+.list_bottom_container{padding: 30rpx 0 20rpx; height: 198rpx;}
+/* 我的团队 */
+.team_title_container{width: 100%; height: 88rpx; padding: 0 32rpx; box-sizing: border-box; background-color: #fff; margin-top: 98rpx;}
+/* NAV */
+.nav_container{ width: 100%; height: 70rpx; background-color: #fff;border-top: 4rpx solid #F6F6FA;}
+.nav_container .slider_list:nth-child(1){border-right: 2rpx solid #FCFCFD;}
+.slider_list{width: 50%; height: 70rpx; line-height: 70rpx; text-align: center;}
+.line_red{position: absolute; top:96%; width:140rpx;height:8rpx;background:#CDA86E;border-radius:4rpx;}
+.color_selected{color: #CDA86E; font-size: 34rpx;}
+/* 店铺标识 */
+.status_team_shop{position: absolute; bottom: -10rpx; left: 0;width:100rpx;height:32rpx;border-radius:16rpx; font-size: 20rpx; line-height: 30rpx; color: #fff; text-align: center;}
+.status_team_shop_blue{background:linear-gradient(-90deg,rgba(44,137,230,1),rgba(83,160,253,1),rgba(81,175,236,1));}
+.status_team_shop_golden{background:linear-gradient(138deg,rgba(255,221,164,1),rgba(192,150,90,1));}
+.status_team_shop_red{background:linear-gradient(-90deg,rgba(232,55,74,1),rgba(253,94,67,1));}

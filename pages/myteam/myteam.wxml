@@ -1,0 +1,100 @@
+<!--pages/myteam/myteam.wxml-->
+<wxs module="filters" src="../../Component/filters/filters.wxs"></wxs>
+<view>
+  <!-- 搜索 -->
+  <search bindsearchmsg="getSearchMsg" searchplaceholder="请输入邀请码/手机号码"></search>
+  <!-- 我的团队人数 -->
+  <view class="team_title_container flex flex_pack_justify_between flex_align_center font_14 color_333">
+    <view>
+      <text>我的团队</text>
+    </view>
+    <view wx:if="{{teamTotal[slide]}}">
+      <text>{{teamTotal[slide]}}人</text>
+    </view>
+  </view>
+  <!-- 团队NAV  -->
+  <view class="nav_container overflow_boxsizing flex font_14 color_333" style="position: {{scrollTop >= 44? 'fixed;top:88rpx;box-shadow:0px 5px 10px #eee;': 'relative;'}} z-index: 99;">
+    <view class="overflow_boxsizing slider_list" bindtap='changeSlide' data-idx="{{index}}" wx:for="{{navList}}" wx:key="">
+      <text class="{{slide === index? 'color_selected': ''}} transition_ease_in_out_fast">{{item}}</text>
+    </view>
+    <view class="line_red translateXY transition_ease_in_out_fast" style="left: {{(slide * 100/navList.length) + (100/navList.length/2)+'%'}};"></view>
+  </view>
+  <!-- 列表 -->
+  <view class="box_container">
+    <view class="list_container overflow_boxsizing font_12 color_999" wx:for="{{listMsg[slide]}}" wx:key="" data-idx="{{index}}" bindtap='toTeamDetail'>
+      <view class="list_top_container overflow_boxsizing flex">
+        <view class="list_pic_container">
+          <image src="{{item.shoplogo? item.shoplogo: '/image/man.jpg'}}"></image>
+          <text class="status_team_shop {{item.shoptype === 1? 'status_team_shop_red': item.shoptype === 2? 'status_team_shop_golden': 'status_team_shop_blue'}}" wx:if="{{item.shoptype !== 1 || item.shoptype !== 2 || item.shoptype !== 3}}">{{item.shoptype === 1? '正式店主': item.shoptype === 2? '实习店主': item.shoptype === 3? '冻结店主': ''}}</text>
+        </view>
+        <view class="flex_1 flex flex_v flex_pack_justify_between">
+          <view class="flex flex_pack_justify_between">
+            <view class="font_14 color_333">
+              <text>{{item.username}}</text>
+            </view>
+            <view>
+              <text>会员职称：</text>
+              <text>{{item.shoptitlename}}</text>
+            </view>
+          </view>
+          <view class="flex flex_pack_justify_between">
+            <view>
+              <text>邀请码：</text>
+              <text>{{item.code}}</text>
+            </view>
+            <view>
+              <text>手机号码：</text>
+              <text>{{item.phone}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+      <!-- <view class="list_bottom_container overflow_boxsizing flex flex_v flex_pack_justify_between font_13 color_999">
+        <view class="flex flex_pack_justify_between">
+          <view>
+            <text>店铺名称：</text>
+            <text>{{item.shopname}}</text>
+          </view>
+          <view wx:if="{{item.openshoptype === 0 || item.openshoptype === 2}}">
+            <text>开店方式：</text>
+            <text>{{item.openshoptype === 0 ? '礼包开店' : item.openshoptype === 2 ? '销售开店' : ''}}</text>
+          </view>
+        </view>
+        <view class="flex flex_pack_justify_between">
+          <view>
+            <text>店铺等级：</text>
+            <text>{{item.shoplevel}}</text>
+          </view>
+          <view>
+            <text>会员职称：</text>
+            <text>{{item.shoptitlename}}</text>
+          </view>
+        </view>
+        <view class="flex flex_pack_justify_between">
+          <view>
+            <text>销售额：</text>
+            <text>￥{{item.saletotal}}</text>
+          </view>
+          <view>
+            <text>他的分享：</text>
+            <text>{{item.fannum}}人</text>
+          </view>
+        </view>
+      </view> -->
+    </view>
+  </view>
+  <!--没有数据  -->
+  <view wx:if="{{page[slide] === 1 && listMsg[slide].length < 1}}" class="flex flex_v flex_align_center" style="margin-top: 120rpx; background-color: transparent;">
+    <view style="width:60%;margin:0 auto">
+      <image src="/image/nofansandnoallies.png" mode='widthFix' style="width:100%"></image>
+    </view>
+    <view class="color_999 font_14">
+      <text>目前没有相关团队喔</text>
+    </view>
+  </view>
+  <!--没有更多了  -->
+  <view class="text_center" wx:if="{{page[slide] !== 1 && noMore[slide]}}" style="margin-top: 20rpx; background-color: transparent; line-height:60rpx;">
+    <text class="color_999 font_12" style="padding: 20rpx 0;">没有更多数据了</text>
+  </view>
+
+</view>

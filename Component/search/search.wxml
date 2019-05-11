@@ -1,0 +1,12 @@
+<!--Component/search/search.wxml-->
+<!-- 搜索 -->
+<view class="search_container font_12 color_333 flex overflow_boxsizing">
+  <view class="flex_1 search_input_container overflow_boxsizing flex flex_align_center" style="position: relative;">
+    <input bindinput="bindKeyInput" value="{{content}}" focus='{{searchFocus}}' type="number" confirm-type="search" placeholder-style="padding-left: 40rpx;font-size: 24rpx; color: #999;" class="overflow_boxsizing" />
+    <text wx:if="{{content.length < 1}}" bindtap="searchFocus" class="iconfont icon-search" style="position: absolute; left: 40rpx;top: 50%;transform: translateY(-50%); z-index: 9;font-size: 24rpx; color: #999;">        {{searchplaceholder}}</text>
+    <text wx:if="{{content.length > 0}}" class="iconfont icon-cancel" style="position: absolute; right: 0; top: 50%;transform: translateY(-50%); color: #5F9DD6; z-index: 9; width: 60rpx; height: 60rpx; line-height: 60rpx; text-align: center; font-size: 30rpx;" bindtap="cancelMsg"></text>
+  </view>
+  <view class="btn_search flex flex_align_center flex_pack_center" bindtap='searchMsg'>
+    <text>搜索</text>
+  </view>
+</view>

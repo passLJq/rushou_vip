@@ -1,0 +1,50 @@
+<!--pages/fxordermanage/fxordermanage.wxml-->
+<import src="../../Component/goapp/goapp.wxml" />
+<view class="fxbox">
+  <!-- 头部 -->
+  <view class='fx1'>总销售额</view>
+  <view class='fx2'>
+    <text>¥ </text>{{mengdata.totalsales}}</view>
+  <view class='fx3'>上月销售额 ¥ {{mengdata.lastmonthsales}}</view>
+  <view class='item'>
+    <view class="itemli">
+      <text class="fx4"><text class='fx5'>¥ </text>{{mengdata.todaysales}}</text>
+      <view class='fx6'>今日销售额</view>
+    </view>
+    <view class="itemli">
+      <text class="fx4"><text class='fx5'>¥ </text>{{mengdata.weeksales}}</text>
+      <view class='fx6'>本周销售额</view>
+    </view>
+    <view class="itemli">
+      <text class="fx4"><text class='fx5'>¥ </text>{{mengdata.monthsales}}</text>
+      <view class='fx6'>本月销售额</view>
+    </view>
+  </view>
+</view>
+<!-- 柱状图 -->
+<view class="fx7">
+  <text>七日销售柱状图</text>
+</view>
+<view class="container">
+  <canvas id="mychart-dom-bar" canvas-id="mychart-bar" class="ase"></canvas>
+</view>
+<view class="fx8">
+  <text>每月销售额明细</text>
+</view>
+
+<view wx:for="{{mengdata.Data}}" wx:for-index="idx" wx:for-item="item">
+  <view class="fx9">
+    <text>{{item.year}}</text>
+  </view>
+  <view class='mingxi' wx:for="{{mengdata.Data[idx].monthdata}}" wx:for-index="index" wx:for-item="its">
+  <view class="items" bindtap='opengoapp' data-name="{{its.month}}">
+      <text class="fx12">{{its.month}}</text>
+      <view class="fx11">
+        <text>¥ {{its.amount}}</text>
+        <i class="right-arrow"></i>
+      </view>
+  </view>
+</view>
+</view>
+
+  <template is="goapp" data="{{goapp,msgtitlle}}" />

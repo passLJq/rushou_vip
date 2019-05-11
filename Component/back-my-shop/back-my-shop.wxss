@@ -1,0 +1,6 @@
+/* Component/back-my-shop/back-my-shop.wxss */
+/* 提示在他人店铺 */
+.prompt_title_container{width: 100%; box-sizing: border-box;background-color: #D7D7D7; padding: 10rpx 20rpx; font-size: 28rpx; }
+.prompt_title_container>text, .prompt_title_container>view{padding: 10rpx 20rpx;}
+.prompt_btn{display: inline-block;background-color: #E3BD83; border-radius: 10rpx; }
+.prompt_title_container:after{content: ""; display: block; clear: both;}

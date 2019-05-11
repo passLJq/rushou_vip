@@ -1,0 +1,22 @@
+<!--pages/mymoneyback/mymoneyback.wxml-->
+<import src="../../Component/goapp/goapp.wxml" />
+<view class="itemmo touime">
+  <view class="toua">
+    <view>钱包余额（元）</view>
+    <view>¥{{money}}</view>
+  </view>
+  <text bindtap='gomoneydetail'>明细</text>
+</view>
+
+<view style='margin-top:60rpx'>
+  <view class='itemmo zili' bindtap='opengoapp'>
+  <view class='itemmo'><i class="iconfont icon-zuanzhang is"></i>申请提现</view>
+  <i class='right-arrow'></i>
+  </view>
+    <view class='itemmo zili' bindtap='gosetpassword'>
+  <view class='itemmo'><i class="iconfont icon-qianbao is"></i>钱包密码</view>
+  <i class='right-arrow'></i>
+  </view>
+</view>
+
+  <template is="goapp" data="{{goapp,msgtitlle}}" />

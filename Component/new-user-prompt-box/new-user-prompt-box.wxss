@@ -1,0 +1,14 @@
+/* Component/new-user-prompt-box/new-user-prompt-box.wxss */
+@import "/app.wxss";
+@import "/common/font-awesome.wxss";
+@import "/common/iconfont.wxss";
+/* 新实习店主送优惠券 */
+.new_shop_coupon_container{background-color: rgba(51,51,51,0.7); width: 100%; height: 100vh; position: fixed; top:0; z-index: 998;}
+.new_shop_coupon_box{width: 600rpx; height: 816rpx;background:linear-gradient(136.1deg,rgba(255,221,164,1),rgba(240,191,122,1));
+border-radius:8px;z-index: 999; padding: 44rpx 30rpx 90rpx; position: fixed; top:120rpx; left: 74rpx;  box-sizing: border-box; }
+.coupon_shop_top{margin-bottom: 46rpx;}
+.coupon_shop_list{width: 542rpx; height: 180rpx; background-color: #fff; box-sizing: border-box; overflow: hidden;margin-bottom: 20rpx; padding: 24rpx 50rpx 14rpx 60rpx;position: relative;}
+.coupon_content{height: 100rpx; margin-bottom: 8rpx;}
+.close_btn{ color: #fff; position: absolute; bottom: 0; left: 50%; transform: translate(-50%, 150%);}
+.get_btn{font-size: 28rpx; width: 200rpx; height: 60rpx; line-height: 60rpx; background-color: #F4C785; border-radius: 30rpx; text-align: center;}
+.close_hove>text{background-color: #eee; border: 2rpx solid #F4C785; color: #333; }

@@ -1,0 +1,4 @@
+/* pages/yshopcheckset/yshopcheckset.wxss */
+page{background: #fff}
+.ins{padding: 30rpx 0;margin: 0 30rpx;border-bottom: 1px solid #F6F6FA;font-size: 28rpx}
+.a{width: 90%;margin: 0 auto;margin-top: 50rpx;}

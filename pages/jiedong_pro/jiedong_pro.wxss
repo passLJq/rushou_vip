@@ -1,0 +1,25 @@
+/* pages/jiedong_pro/jiedong_pro.wxss */
+.probacks{position: fixed;z-index: -99;width: 100%;top: 0}
+.probacks image{width: 100%}
+page{background-color: #FDD4BD}
+.toubu{color: rgb(240,43,53);text-align: center;margin-top: 112rpx;}
+.toubu view:nth-child(1){font-weight: 600;font-size: 32rpx;margin-bottom: 20rpx}
+.toubu view:nth-child(2){font-weight: 700;font-size: 46rpx}
+.toubu view:nth-child(3){font-weight: 700;font-size: 46rpx}
+
+.pitem{display: flex;align-items: center;}
+.box{background-color: #fff;padding: 30rpx 28rpx;width: 85%;margin: 0 auto;border-radius: 8px;margin-bottom: 20rpx}
+.proimg{width: 192rpx;height: 192rpx;flex-shrink: 0;margin-right: 20rpx}
+.protitle{  color: #333;
+  font-size: 28rpx;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  height: 76rpx;}
+  .jiage{justify-content: space-between;margin-top: 52rpx;}
+  .jiage view:nth-child(1){color: #333333;font-size: 40rpx;}
+  .jiage view:nth-child(2){font-size: 28rpx;padding: 10rpx 40rpx;color: #fff;margin: 0}
+  .doms{font-size: 24rpx}
+  .aliibox{margin-top: 60rpx;}

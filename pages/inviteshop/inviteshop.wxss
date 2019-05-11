@@ -1,0 +1,5 @@
+/* pages/inviteshop/inviteshop.wxss */
+@import "../../Component/sharebox/sharebox.wxss";
+page{background-color: #fff}
+.a{width: 100%;position: fixed;bottom: 0;border-radius: 0}
+.boxs{width: 100%;overflow: hidden}

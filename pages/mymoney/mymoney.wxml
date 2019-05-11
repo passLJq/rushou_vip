@@ -1,0 +1,20 @@
+<!--pages/mymoney/mymoney.wxml-->
+<view class="mingxibox" wx:for="{{mengdata}}">
+  <view class="items ules">
+    <text>{{item.amount>0?'钱包退款':'钱包支付'}}</text>
+    <text style="{{item.amount>0?'':'color:red'}}">{{item.amount>0?'+'+item.amount:item.amount}}</text>
+  </view>
+  <view class="bottom">
+    <view class="bottom1"><text class="bop1 ab1">订单号</text><text class="bop3">{{item.orderNo}}</text></view>
+    <view><text class="bop1">订单时间</text><text class="bop2">{{item.time}}</text></view>
+  </view>
+</view>
+
+  <view class="nodata" wx:if="{{mengdata.length==0}}">
+<image src="../../image/noactivitys.png" mode='widthFix'></image>
+<view>抱歉，目前没有显示记录~</view>
+</view>
+<!--没有更多了  -->
+<view class="text_center" wx:if="{{currentPage !== 1 && noMore && mengdata.length < (currentPage * 8)}}" style="background-color: transparent; line-height:60rpx;">
+  <text class="color_999 font_12" style="padding: 20rpx 0;">{{(mengdata.length + 8) === (currentPage * 8)? '正在加载中...': '全部明细已显示'}}</text>
+</view>

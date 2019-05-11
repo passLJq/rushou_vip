@@ -1,0 +1,29 @@
+/* Component/product-list/product-list.wxss */
+@import "/app.wxss";
+@import "/common/iconfont.wxss";
+/* 商品列表 */
+page{padding-bottom: 108rpx;}
+.box_container .list_container:nth-child(1){margin-top: 88rpx;}
+.list_container{background-color: #fff; width: 100%; margin-bottom: 20rpx;}
+.list_control{width: 100%; height: 88rpx;}
+.list_btn_container>view{margin-left: 36rpx; padding: 20rpx;}
+
+.list_content{width: 100%; height: 240rpx; border-bottom: 2rpx solid #F6F6FA;}
+.shop_logo{margin-right: 24rpx;}
+.shop_logo>image{width: 38rpx; height: 38rpx;}
+.default_address_container{color: transparent;}
+.default_address_container>view{border-radius: 100px;width:44rpx;height:44rpx; line-height: 44rpx; box-sizing: border-box;}
+.default_address_container {margin-right: 20rpx;}
+.default_address_container image{border-radius: 100px; width:44rpx;height:44rpx;}
+.product_list{padding: 24rpx 0;}
+.product_img_container{width: 192rpx; height: 192rpx; margin-right: 30rpx;}
+.product_img_container>image{width: 192rpx; height: 192rpx;}
+/*底部  */
+.footer_container{position: fixed; bottom: 0; background-color: #fff;z-index: 9; width: 100%; height: 108rpx;box-shadow: 0 -1rpx 10px #ccc;-moz-box-shadow: 0 -1rpx 10px #ccc;}
+.pay_btn{width: 240rpx; height: 70rpx; background:rgba(205,168,110,0.2); color: #CDA86E;border:1px solid rgba(205,168,110,1); border-radius: 36rpx; line-height: 70rpx; text-align: center;}
+.can_pay_btn {background-color: #CDA86E;box-shadow:0px 5px 10px #CFCFCF; border: 0; color: #fff;}
+
+.bill_btn_contianer{width: 200rpx; height: 56rpx; background:rgba(205,168,110,0.2); color: #CDA86E;border:1px solid rgba(205,168,110,1); border-radius: 36rpx; line-height: 56rpx; text-align: center;}
+.bill_btn_contianer>view>text{display: inline-block;font-size: 24rpx; color:#CDA86E; background-color: transparent; border:0; width: 100%; height: 100%; border-radius: 36rpx; line-height: 56rpx;}
+button::after{content: none;}
+.delete_btn{width: 144rpx; background-color: #fff; border: 2rpx solid #D8D8D8; font-size: 24rpx; color: #999; margin-right: 24rpx;}

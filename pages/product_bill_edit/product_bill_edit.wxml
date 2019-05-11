@@ -1,0 +1,104 @@
+<!--pages/product_bill_edit/product_bill_edit.wxml-->
+<import src="../../Component/sharebox/sharebox.wxml" />
+<view>
+<view wx:if="{{statusType==1}}" class="zhanshi">
+    <view>{{billTitle}}</view>
+    <view>{{billContent}}</view>
+</view>
+   <view class="bill_container padding16 overflow_boxsizing font_14 color_333" wx:else>
+    <view class="bill_top_container overflow_boxsizing flex flex_align_center">
+      <view class="bill_names_container">
+        <text>清单标题</text>
+      </view>
+      <view class="color_999 flex_1">
+        <input type='text' placeholder='为你的清单添加一个标题' disabled='{{statusType}}' maxlength='20' value="{{billTitle}}" bindinput="billTitleInput" />
+      </view>
+      <view class="font_14 color_999">
+        <text>{{billTitle.length}}</text>
+        <text>/20</text>
+      </view>
+    </view>
+    <view class="bill_bottom_container overflow_boxsizing flex ">
+      <view class="bill_names_container overflow_boxsizing flex flex_align_center">
+        <text>简介</text>
+      </view>
+      <view class="color_999 flex_1 overflow_boxsizing" style="position: relative;">
+        <textarea disabled='{{statusType}}' placeholder='为你的清单添加简介' maxlength='50' bindinput='billContentInput' value='{{billContent}}' style="width: 100%;heihgt: 180rpx; box-sizing: border-box;" />
+        <view style="position: absolute; bottom: 0; right:0;" class="font_14 color_999">
+          <text>{{billContent.length}}</text>
+          <text>/50</text>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- 录音 -->
+  <view class='addtou' wx:if='{{!(!src === true && videotime <= 0 && statusType)}}'>
+    <view class="asietm">
+      <text class='tui'>{{statusType === 0? '修改': ''}}推荐语音</text>
+    </view>
+    <button class='luyin' bindtap='openvied' wx:if='{{(!src === true && videotime <= 0 && statusType === 0)}}'>我要开始录音</button>
+    <view class='items' wx:if='{{(!src === false && videotime > 0)}}'>
+      <view class='vidioimg'>
+        <image src='{{bosrc}}' mode='aspectFit' bindtap='playRecord'></image>
+        <text class='vitime'>{{videotime}}''</text>
+      </view>
+      <button class='luyin' open-type="openSetting" wx:if="{{status==2 && statusType === 0}}" bindopensetting="checkluying">请开启录音授权</button>
+      <text class='lu' bindtap='ales' data-del='1' wx:if="{{status !== 2 && statusType === 0}}">重新录制</text>
+    </view>
+  </view>
+  <!-- //录音弹出 -->
+  <view class='zhezao' wx:if='{{openvideo}}' catchtouchmove="true" bindtap='openvied'></view>
+
+  <view class='bbox' style="{{openvideo?'display:block':'display:none'}}" catchtouchmove="true">
+    <view class="circle-box">
+      <canvas class="circle" style="width:70px; height:70px;" canvas-id="canvasCircle">
+      </canvas>
+      <canvas class="circle" style="z-index:99999;width:70px; height:70px;" canvas-id="canvasArcCir">
+      </canvas>
+      <view class='bo' wx:if='{{video==1}}'>
+        <i bindtap='drawCircle' class='iconfont icon-bofang'></i>
+      </view>
+      <view class='bo' style='bottom:45px' wx:elif='{{video==2}}'>
+        <i bindtap='stopcircle' class='iconfont icon-zanting' style='font-size:42px'></i>
+      </view>
+      <view class='bo' style='bottom:45px' wx:elif='{{video==3}}'>
+        <i class='iconfont icon-yuan' style='font-size:42px'></i>
+      </view>
+      <text class='statlu' wx:if='{{video==1}}'>开始录制</text>
+      <text class='statlu' wx:elif='{{video==2}}'>录制中</text>
+
+      <block wx:if='{{video==3}}'>
+        <view class='queren' bindtap='openvied' data-que='1'>
+          <i class='iconfont icon-queren'></i>
+          <view>确认</view>
+        </view>
+        <view class='del' bindtap='delevied'>
+          <i class='iconfont icon-Close'></i>
+          <view>删除</view>
+        </view>
+      </block>
+    </view>
+  </view>
+  <!-- 清单列表 -->
+  <product-list slide="{{slide}}" statusType="{{statusType}}" billMaxCounts="{{billMaxCounts}}" shopList="{{billList[0].itemlist}}" prolistid="{{prolistid}}" listType="bill" ruid="{{ruid}}" bindsaveBill="saveBill" bindshareBill="goshare" binddeleteBillSome="deleteBillSome" binddeleteList="deleteList"
+    bindmovePro="movePro"></product-list>
+
+  <view class="flex flex_v flex_pack_justify_around font_14" wx:if="{{(slide === 0 && billList[0].itemlist.length < 1) || (slide === 0 && billList[0].itemlist.length < 1)}}" style="margin-top: 200rpx;margin-bottom: 200rpx;height: 200rpx; color: #CDA86E;width: 100%;">
+    <view class="text_center">
+      <image src="/image/no_pro_list_0.png" style="width: 300rpx; height: 300rpx;margin: 0 auto;"></image>
+    </view>
+    <view class="text_center color_999" style="margin-bottom: 20rpx;">
+      <text>{{slide === 0?'没有清单喔，赶紧去添加清单吧~': ''}}</text>
+    </view>
+    <view class="text_center">
+      <view class="btn_toselect" hover-class="btn_click" bindtap='toAddMsg'>
+        <text>{{slide === 0?'去选购': '去添加清单'}}</text>
+      </view>
+    </view>
+  </view>
+  <!--没有更多了  -->
+  <view class="text_center" wx:if="{{slide === 0 && noMore}}" style="background-color: transparent; line-height:60rpx;">
+    <text class="color_ccc font_12" style="padding: 20rpx 0;">没有更多数据了</text>
+  </view>
+  <template is="sharebox" data="{{showshare, zuan: zuan,haibao:haibao}}" />
+</view>

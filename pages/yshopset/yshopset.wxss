@@ -1,0 +1,13 @@
+/* pages/yshopset/yshopset.wxss */
+page{background: #fff}
+.touitem{display:flex;align-items: center;}
+.touitem image{width: 88rpx;height: 88rpx}
+.settou{justify-content: center;height: 260rpx;background-color:rgb(245,238,226)}
+.toutitle{margin-left: 20rpx}
+.toutitle text{color: #333;font-weight: 700;font-size: 34rpx;}
+.xinxi{font-size: 24rpx;margin-top: 10rpx}
+.xin{color: red;margin-right: 10rpx}
+.xinxilistbox{background-color: #fff;padding-top: 100rpx;border-radius: 16px 16px 0 0;margin-top: -20rpx}
+.xix{justify-content: space-between;margin: 0 20rpx;border-bottom: 1px solid #F6F6FA;padding: 20rpx 30rpx 20rpx 0;font-size: 28rpx}
+.xix input{text-align: right}
+.open{width: 90%;margin-top: 30%}

@@ -1,0 +1,12 @@
+{
+  "navigationBarBackgroundColor": "#ffffff",
+  "navigationBarTextStyle": "black",
+  "navigationBarTitleText": "优选",
+  "backgroundColor": "#f5f5f5",
+  "backgroundTextStyle": "dark",
+  "enablePullDownRefresh": true,
+   "usingComponents": {
+     "go_openyshop": "/Component/go_openyshop/go_openyshop",
+            "foot-nav": "/Component/foot-nav/foot-nav"
+  }
+}

@@ -1,0 +1,6 @@
+<!--pages/yshopcheckset/yshopcheckset.wxml-->
+<view class='ins'>
+<input type='text' placeholder='{{tishi}}' maxlength='{{num}}' bindinput="bind1" focus="{{focus}}" value='{{text}}'></input>
+</view>
+
+<view class="wxbtn a" bindtap='save'>保存</view>

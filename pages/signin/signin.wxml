@@ -1,0 +1,86 @@
+<!--pages/signin/signin.wxml-->
+<view class="abose">
+<view class="boxs">
+  <view class="boxli">
+    <view class="xp1">百万奖池仅剩</view>
+    <view class="xp2">¥{{showmoney}}</view>
+    <view class="xp4">本周签到</view>
+  </view>
+  <view class="xp3" bindtap='huodong'>活动细则</view>
+</view>
+
+<view class="packon">
+  <view class="qianitem">
+    <view class="qiantime" wx:for="{{[1,2,3,4,5,6,7]}}" style="{{clickwho[index]?'background:#fff;color:#333':''}}">
+    <text wx:if="{{qiandaodata[index]>0||qiandaodata[index]<0}}" bindtap="bian" data-index="{{index}}">{{index+1}}天</text>
+    <text wx:elif="{{qiandaodata.length==index&&!nowsignin}}" bindtap="bian" data-index="{{index}}">{{qiandaodata.length+1}}天</text>
+    <i class="iconfont icon-jinbi_" wx:else></i>
+    </view>
+  </view>
+  <view class="initem">
+    <view class="inileft">
+      <view class="xp6" wx:if="{{qiandaodata[clickindex]<0}}">活动已结束</view>
+      <view class="xp6" wx:else>{{qiandaodata[clickindex]>0?'+'+qiandaodata[clickindex]:'Hi~'}}<text  class="small"wx:if="{{qiandaodata[clickindex]>0}}">元</text></view>
+      <view class="xp7">{{qiandaodata[clickindex]>0||qiandaodata[clickindex]<0?'恭喜您已获取今日签到红包哦':'今日您还没有签到哦'}}</view>
+    </view>
+    <view class="xp5"  wx:if="{{qiandaodata[clickindex]>0||qiandaodata[clickindex]<0}}" style="background:#D8D8D8">明日再来</view>
+    <view class="xp5" bindtap='qiandao' wx:else>签到领红包</view>
+  </view>
+
+  <view class="nie" bindtap='gofenxiang'>
+    <image src="https://images.rushouvip.cn/IMG/chu2.jpg" mode="widthFix"></image>
+  </view>
+  <view class="nies" bindtap='gofenpro'>
+    <image src="https://images.rushouvip.cn/IMG/chu3.jpg" mode="widthFix"></image>
+  </view>
+</view>
+
+<view class="zhezaos" wx:if="{{shownow}}" bindtap='huodong'></view>
+<view class="actives" wx:if="{{shownow}}">
+  <view class="tatile">活动细则</view>
+  <view class="shouone">
+    <view class="biaoti">
+    <text>新手奖励</text>
+    <view class='xian'></view>
+    </view>
+    <view class="guizi">通过入手VIP小程序申请成为实习店主，即送100元购物优惠券以及随机现金红包奖励</view>
+  </view>
+    <view class="shouone">
+    <view class="biaoti">
+    <text>每日签到</text>
+    <view class='xian'></view>
+    </view>
+    <view class="guizi">完成每日签到即可获得随机现金红包奖励</view>
+  </view>
+    <view class="shouone">
+    <view class="biaoti">
+    <text>分享商品</text>
+    <view class='xian'></view>
+    </view>
+    <view class="guizi">好友点击进入后，即可获得随机现金红包奖励，每天限领3次</view>
+  </view>
+</view>
+
+<view class="zhezaos" wx:if="{{!activitiesswitch}}"></view>
+<view class="actives activesover" wx:if="{{!activitiesswitch}}">
+<view class='actp1'>活动已结束</view>
+<view class='actp2'>下次早点来哦~</view>
+<view class="wxbtn actp3" bindtap='okle'>我知道了</view>
+</view>
+</view>
+<view class="popup_container" catchtouchmove='return true' wx:if="{{showPopup}}">
+  <view class="popup_box translateXY flex flex_v flex_pack_justify_between">
+    <view class="popup_img flex flex_pack_center">
+      <image src="/image/qiandao_icon.png"></image>
+    </view>
+    <view class=" flex flex_pack_center font_17 color_333 font_weight">
+      <text>恭喜您</text>
+    </view>
+    <view class=" flex flex_pack_center font_14 color_333" style=" margin-top: 8rpx; line-height:50rpx;">
+      <text>今日签到获得 <text style="color: #CDA86E;" class="font_18 font_weight">{{qiandaodata[clickindex]>0?'+'+qiandaodata[clickindex]:'活动已结束'}}</text> 元</text>
+    </view>
+    <view class="popup_btn flex flex_pack_center font_14 color_fff" bindtap='closePopup'>
+      <text class="flex flex_pack_center flex_align_center overflow_boxsizing">我知道了</text>
+    </view>
+  </view>
+</view>

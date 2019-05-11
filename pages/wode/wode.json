@@ -1,0 +1,12 @@
+{
+  "navigationBarBackgroundColor": "#E18C50",
+  "navigationBarTextStyle": "white",
+  "navigationBarTitleText": "我的",
+  "backgroundColor": "#fff",
+  "backgroundTextStyle": "light",
+  "enablePullDownRefresh": false,
+  "usingComponents": {
+    "back-my-shop": "/Component/back-my-shop/back-my-shop",
+                      "foot-nav": "/Component/foot-nav/foot-nav"
+  }
+}

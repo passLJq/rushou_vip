@@ -1,0 +1,24 @@
+<!--pages/jiedong_pro/jiedong_pro.wxml-->
+<view class="probacks">
+  <image src='https://images.rushouvip.cn/IMG/jiedongback.jpg' mode='widthFix'></image>
+</view>
+
+<view class="toubu">
+  <view>—— 创业礼包 ——</view>
+  <view>购买以下任意礼包</view>
+  <view>即可成为正式店主</view>
+</view>
+
+<view class="aliibox">
+  <view class="pitem box" wx:for="{{listdata}}" bindtap='goductdetail' data-pid="{{item[0].packageitems[0].productid}}"
+  data-buynum="{{item[0].packageitems[0].quantity}}" data-packageid="{{item[0].packageitems[0].packageid}}">
+    <image src='{{item[0].packageitems[0].image}}' class="proimg"></image>
+    <view>
+      <view class="protitle">{{item[0].packageitems[0].productname}}</view>
+      <view class="pitem jiage">
+        <view><text class="doms">¥</text>{{item[0].packageitems[0].propackageprice}}</view>
+        <view class="wxbtn">立即购买</view>
+      </view>
+    </view>
+  </view>
+</view>

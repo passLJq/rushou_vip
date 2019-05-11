@@ -1,0 +1,225 @@
+<!--pages/wode/wode.wxml-->
+<import src="../../Component/goapp/goapp.wxml" />
+<view>
+  <!-- 提示在别人店铺  -->
+  <back-my-shop ruid="{{ruid}}" uid="{{uid}}" fxshopid="{{fxshopid}}"></back-my-shop>
+  <!--顶部个人信息  -->
+  <view class="headd">
+    <view class="membermsg">
+      <image src="{{userMsg.pic || '/image/man.jpg'}}"></image>
+      <view class="usermag">
+        <text class="username" wx:if="{{uid}}">{{userMsg.name && userMsg.name || ""}}</text>
+        <text class="username" wx:else style="margin-top: 40rpx;">未登录</text>
+        <text class="invcode" wx:if="{{userMsg.isintern != '2' && userMsg.code}}">邀请码: {{userMsg.code}}</text>
+        <view class="dianzhu" wx:if="{{userMsg}}">
+          <view>{{userMsg.shoplevelname}}</view>
+          <view style="margin-left: 10rpx;">{{userMsg.shoptitlename}}</view>
+        </view> 
+      </view>
+    </view>
+  </view>
+ <block wx:if="{{false}}">
+   <view class="main" wx:if="{{!ruid && uid && fxshopid && userMsg.isintern != '0'}}">
+    <view class="successSell" wx:if="{{!ruid && uid && fxshopid && userMsg.isintern != '0'}}">
+      <view class="success_tittle">
+        <view class="titt"><text class="iconfont icon-dui icon"></text><text class="conn">成功售出<text style="color: #FF422C;">3单</text>，即可成为正式店主</text></view>
+      </view>
+      <view class="word"><text style="margin-right: 14rpx;">·</text><text>倒计时结束前为成功售出3单的用户，店铺将被冻结</text></view>
+      <view class="word"><text style="margin-right: 14rpx;">·</text><text>冻结状态下已产生的收益将无法提现。</text></view>
+      
+      <view class="line" style="margin: 30rpx 0;"></view>
+
+      <view class="lasttime" wx:if="{{!ruid && uid && userMsg.isintern == '1' && (time.day > 0 || time.hour > 0 || time.minute > 0 || time.second > 0)}}">
+        <text style="color:#333;font-size:24rpx;margin-bottom: 30rpx;">剩余时间</text>
+        <view class="font_14 flex flex_pack_center flex_align_center">
+          <view>
+            <text class="time_d">{{time.day}}</text>
+            <text style="margin: 0 18rpx;">天</text>
+          </view>
+          <view>
+            <text class="time_h">{{time.hour}}</text>
+            <text style="margin: 0 18rpx;">时</text>
+          </view>
+          <view>
+            <text class="time_m">{{time.minute}}</text>
+            <text style="margin: 0 18rpx;">分</text>
+          </view>
+          <view>
+            <text class="time_s">{{time.second}}</text>
+            <text style="margin: 0 18rpx;">秒</text>
+          </view>
+        </view>
+      </view>
+    </view>
+  </view>
+ </block>
+
+  <view class="mainContainer">
+    <view class="shoppowner itemcard">
+      <view class="tittl">
+        <text class="titcon">店主特权</text>
+        <!-- <text class="checkall">查看全部<text class="iconfont icon-you" style="font-size:24rpx;"></text></text> -->
+      </view>
+      <view class="itemrow ">
+        <view class="top">
+          <view class="leftpoint"></view>
+          <text>累计销售</text>
+        </view>
+        <view style="width:100%;display: flex;margin: 15rpx 0;"  bindtap='gofxorder'>
+          <view style="width:50%;padding-left: 10rpx;display:flex;align-items:center;">
+            <text style="font-size:48rpx;color:#DE9A6B;font-weight:600;">{{SalesList.totalsales || '0.00'}}</text>
+						<text class="iconfont icon-you" style="font-size:24rpx;color:#DE9A6B;margin-left:20rpx;"></text>
+          </view>
+           <view style="width:50%;padding-left: 10rpx;">
+            <text style="font-size:28rpx;color:#999;">今日 {{SalesList.todaysales || '0.00'}}</text>
+          </view>
+        </view>
+      </view>
+
+      <view class="line"></view>
+
+      <view class="shouyi">
+        <view class="itemrow" style="width: 50%;" bindtap="goincome">
+          <view class="top">
+            <view class="leftpoint"></view>
+            <text>我的收益</text>
+          </view>
+          <view class="shouyicon">
+            <view style="display:flex;align-items:center;">
+						  <text class="prinum">￥{{userMsg.totalCommision || '0.00'}}</text>
+							<text class="iconfont icon-you" style="font-size:24rpx;margin-left:20rpx;"></text>
+						</view>
+            <text>今日新增 <text style="color: #FF5541;font-size: 24rpx;">+{{userMsg.todaycommision || '0.00'}}</text></text>
+          </view>
+        </view>
+        <view class="itemrow" style="width: 50%;" bindtap="gofxorder">
+          <view class="top">
+            <view class="leftpoint"></view>
+            <text>销售订单</text>
+          </view>
+           <view class="shouyicon">
+					 <view style="display:flex;align-items:center;">
+						  <text class="prinum">￥{{userMsg.totalorders || '0.00'}}</text>
+							<text class="iconfont icon-you" style="font-size:24rpx;margin-left:20rpx;"></text>
+						</view>
+            <text>今日新增 <text style="color: #FF5541;font-size: 24rpx;">+{{userMsg.todayorders || '0'}}</text></text>
+          </view>
+        </view>
+      </view>
+    </view>
+
+    <view class="itemcard">
+      <view class="tittl" style="justify-content: flex-start;">
+        <text class="titcon">我的团队</text>
+        <text class="checkall" style="margin-left: 10rpx;">邀请小伙伴，躺着就能赚！</text>
+      </view>
+      
+      <view style="width: 100%; display:flex;justify-content: space-between;">
+        <view class="itemrow teamm" style="width: auto;">
+         <view class="top">
+          <view class="leftpoint"></view>
+          <text>团队数量</text>
+        </view>
+        <text class="tempnum">{{teamList.total || 0}}</text>
+        <text class="newadd">昨日新增 <text style="color: #FF5541;font-size: 24rpx;">+{{teamList.yesterdaypoint || '0'}}</text></text>
+      </view>
+
+    <view class="btnbox">
+      <text class="butn boi" style="color: #DE9A6B;" bindtap='gomyteam' data-type="1">查看全部</text>
+      <text class="butn gra" style="color: #fff;" bindtap='goinvite'>邀请店主</text>
+    </view>
+    
+    </view>
+      </view>
+
+  <view class="itemcard">
+    <view class="tittl" bindtap="toOrder">
+        <text class="titcon">我的订单</text>
+        <text class="checkall">查看全部<text class="iconfont icon-you" style="font-size:24rpx;"></text></text>
+      </view>
+    
+    <view class="itembox">
+      <view class="b" bindtap='toOrder' data-type="1">
+        <image src="/image/daifukuan.png"></image>
+        <text>待付款</text>
+        <text class="numm" wx:if="{{orderState.unpay > 0}}">{{orderState.unpay}}</text>
+      </view>
+      <view class="b" bindtap='toOrder' data-type="2">
+        <image src="/image/daifahuo.png"></image>
+        <text>待发货</text>
+        <text class="numm" wx:if="{{orderState.tobesend > 0}}">{{orderState.tobesend}}</text>
+      </view>
+      <view class="b" bindtap='toOrder' data-type="3">
+        <image src="/image/daishouhuo.png"></image>
+        <text>待收货</text>
+        <text class="numm" wx:if="{{orderState.unreceipt > 0}}">{{orderState.unreceipt}}</text>
+      </view>
+      <view class="b" bindtap='toAfterSale'>
+        <image src="/image/shouhou.png"></image>
+        <text>售后</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="itemcard">
+    <view class="tittl">
+        <text class="titcon">我的服务</text>
+      </view>
+    
+    <view class="itembox biggerImg">
+      <view class="b" bindtap="gomypack">
+        <image src="/image/wdzc.png"></image>
+        <text>我的资产</text>
+      </view>
+      <view class="b" bindtap="toPages" data-name="mycoupon">
+        <image src="/image/wdyhq.png"></image>
+        <text>我的优惠券</text>
+      </view>
+      <view class="b" bindtap="toPages" data-name="voucher_center">
+        <image src="/image/lqzx.png"></image>
+        <text>领券中心</text>
+      </view>
+      <view class="b" bindtap="govisirtor">
+        <image src="/image/fwzj.png"></image>
+        <text>我的访问</text>
+      </view>
+      <view class="b" bindtap="gomessagelist">
+        <image src="/image/xxtz.png"></image>
+        <text>消息通知</text>
+      </view>
+      <view class="b" bindtap="toAddress">
+        <image src="/image/dzgl.png"></image>
+        <text>地址管理</text>
+      </view>
+      <button class="b" style="background: #fff;padding:0;" open-type="contact">
+        <image src="/image/mhzd.png"></image>
+        <text>卖货指导</text>
+      </button>
+      <view class="b" bindtap="phoneCall" data-reply-phone="4006906206">
+        <image src="/image/lxdh.png"></image>
+        <text>联系电话</text>
+      </view>
+      <view class="b" bindtap="gogoods">
+        <image src="/image/spgl.png"></image>
+        <text>商品管理</text>
+      </view>
+      <view class="b" bindtap="gohuodong">
+        <image src="/image/rwzx.png"></image>
+        <text>百万活动</text>
+      </view>
+      <view class="b" bindtap="gowechat">
+        <image src="/image/wxjb.png"></image>
+        <text>微信解绑</text>
+      </view>
+    </view>
+
+  </view>
+
+  </view>
+</view>
+  
+
+<template is="goapp" data="{{goapp,msgtitlle}}" />
+
+
+<foot-nav clickindex='3'></foot-nav>

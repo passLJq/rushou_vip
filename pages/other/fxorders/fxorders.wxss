@@ -1,0 +1,17 @@
+/* pages/other/fxorders/fxorders.wxss */
+page{background-color: #F3F2F2;}
+page>view>view{background-color: #fff;}
+/* NAV */
+.nav_container{position: fixed; top: 88rpx; width: 100%; height: 70rpx; background-color: #fff;}
+.nav_container .slider_list:nth-child(1){border-right: 2rpx solid #FCFCFD;}
+.slider_list{width: 50%; height: 70rpx; line-height: 70rpx; text-align: center;}
+.line_red{position: absolute; top:96%; width:80rpx;height:8rpx;background:#CDA86E;border-radius:4rpx;}
+.color_selected{color: #CDA86E; font-size: 34rpx;}
+/* 列表 */
+.list_container{margin-top: 12rpx; background-color: #fff;}
+.list_box{background-color: transparent!important;}
+.list_box>.list_container:nth-child(1){margin-top: 0;}
+.order_id{height: 72rpx; line-height: 72rpx; border-bottom: 2rpx solid #F6F6FA;}
+.order_container{width: 100%; height: 146rpx; padding: 26rpx 0 24rpx;}
+.order_user_pic{width: 116rpx; height: 100%;}
+.order_user_pic>image{width: 96rpx; height: 96rpx; border-radius: 50%;}
